@@ -1,7 +1,7 @@
 {
   "name": "PersonaMate",
   "short_name": "PersonaMate",
-  "start_url": "./index.html",
+  "start_url": "./",
   "display": "standalone",
   "background_color": "#f5f7fa",
   "theme_color": "#4a6fa5",

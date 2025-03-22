@@ -42,7 +42,12 @@ export function checkForUpdates(currentVersion) {
   if (!navigator.onLine) return;
   if (localStorage.getItem('updateDismissed') === 'true') return;
 
+  // Try multiple paths to find version.json
   fetch('./version.json')
+    .catch(() => {
+      console.log('Trying alternate version.json path');
+      return fetch('version.json');
+    })
     .then(response => {
       if (!response.ok) throw new Error('Version check failed');
       return response.json();
