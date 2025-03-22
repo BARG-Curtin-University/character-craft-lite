@@ -33,17 +33,18 @@ PersonaMate is a personality configuration tool for creating structured chatbot 
 
 ## 📦 What's Included
 
-- `index.html` – Your main HTML file (replace the content block with your full app)
-- `manifest.json` – Enables PWA install on desktop and mobile
-- `service-worker.js` – Caches content for offline use
-- `version.json` – Used to check for available updates
-- `update-check.js` – Shows a banner if a new version is available
-- `icons/` – App icons for installation prompts and favicon use
+Key files for the PWA:
+- `src/index.html` – Main HTML file
+- `src/manifest.json` – Enables PWA install on desktop and mobile
+- `src/service-worker.js` – Caches content for offline use
+- `src/version.json` – Used to check for available updates
+- `src/icons/` – App icons for installation prompts and favicon use
+
+Build system:
 - `package.json` – Includes scripts for building different versions:
   - `npm run build` – Standard web build
-  - `npm run build:pwa` – PWA with enhanced offline capabilities
-  - `npm run build:single` – Optimized single-file build
-  - `npm run bundle` – Standalone HTML file for sharing
+  - `npm run build:pwa` – PWA with enhanced offline capabilities (recommended)
+  - `npm run bundle` – Creates standalone HTML file in the dist directory
 
 ---
 

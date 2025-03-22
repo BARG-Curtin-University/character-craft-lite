@@ -4,12 +4,6 @@ const cheerio = require('cheerio');
 
 // Path to the built files
 const distDir = path.join(__dirname, '..', 'dist');
-const outputDir = path.join(__dirname, '..', 'standalone');
-
-// Create output directory if it doesn't exist
-if (!fs.existsSync(outputDir)) {
-  fs.mkdirSync(outputDir);
-}
 
 // Read the HTML file
 const htmlPath = path.join(distDir, 'index.html');
@@ -85,6 +79,6 @@ inlineResources();
 
 // Create a standalone HTML file
 const standaloneHtml = $.html();
-fs.writeFileSync(path.join(outputDir, 'personamate-standalone.html'), standaloneHtml);
+fs.writeFileSync(path.join(distDir, 'personamate-standalone.html'), standaloneHtml);
 
-console.log('Created standalone HTML file: standalone/personamate-standalone.html');
+console.log('Created standalone HTML file: dist/personamate-standalone.html');

@@ -40,11 +40,7 @@ jobs:
 
       - name: Create Standalone Version
         run: npm run bundle
-        # This will create a standalone HTML file in the standalone directory
-      
-      - name: Copy Standalone to dist
-        run: cp standalone/personamate-standalone.html dist/
-        # Makes the standalone version available via GitHub Pages
+        # This will create a standalone HTML file directly in the dist directory
       
       - name: Setup Pages
         uses: actions/configure-pages@v4
