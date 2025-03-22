@@ -138,7 +138,6 @@ The optimized, production-ready version will be output to the `dist/` folder for
 The standalone version will be available in the `standalone/` folder.
 
 Deploy the `dist/` folder to GitHub Pages or any static hosting provider.
-```
 
 ---
 
@@ -164,13 +163,12 @@ This is useful if your main branch gets busy, and you don’t want to commit bui
 | **Automation (optional)** | Use GitHub Actions to build & deploy |
 | **Live site** | `https://<username>.github.io/<repo-name>/` |
 
-Let me know if you'd like a live preview banner for your README or want help automating version bumps for `version.json`!
 
 ---
 
 ## 🧠 About PersonaMate
 
-PersonaMate helps you generate structured chatbot personas grounded in behavioral theory. It's designed for:
+PersonaMate helps you generate structured chatbot personas grounded in behavioural theory. It's designed for:
 - Retrieval-Augmented Generation (RAG) pipelines
 - Zero-shot prompt scaffolding
 - Education, research, and AI development

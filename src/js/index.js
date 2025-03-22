@@ -296,38 +296,4 @@ window.addEventListener('error', function(event) {
 // Add manual initialization via console for debugging
 console.log("Debug tip: You can manually initialize by typing window.initializePersonaMate() in the console");
 
-// Add debug button
-document.addEventListener('DOMContentLoaded', function() {
-  // Add a debug button to the bottom of the page
-  const debugButton = document.createElement('button');
-  debugButton.textContent = "Debug: Re-initialize JS";
-  debugButton.style.position = 'fixed';
-  debugButton.style.bottom = '10px';
-  debugButton.style.right = '10px';
-  debugButton.style.zIndex = '9999';
-  debugButton.style.background = '#ff5722';
-  debugButton.style.color = 'white';
-  debugButton.style.border = 'none';
-  debugButton.style.padding = '8px 16px';
-  debugButton.style.borderRadius = '4px';
-  debugButton.style.cursor = 'pointer';
-  
-  debugButton.addEventListener('click', function() {
-    console.clear();
-    console.log("Manual re-initialization triggered");
-    
-    // Reset initialization flag to force re-initialization
-    window.isPersonaMateInitialized = false;
-    
-    // Remove all existing event listeners from critical elements
-    const buttons = document.querySelectorAll('button');
-    buttons.forEach(btn => {
-      const newBtn = btn.cloneNode(true);
-      btn.parentNode.replaceChild(newBtn, btn);
-    });
-    
-    safeInitialize();
-  });
-  
-  document.body.appendChild(debugButton);
-});
+// Debug initialization is disabled in production

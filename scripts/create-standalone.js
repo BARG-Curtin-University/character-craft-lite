@@ -138,6 +138,79 @@ $('head').append(`
   </script>
 `);
 
+// Add helper functions directly to standalone HTML
+$('head').append(`
+  <script>
+    // These global helper functions ensure core functionality works 
+    // even if module bundling fails
+    
+    // Global helper functions for the standalone version
+    window.PersonaMateHelpers = {
+      // Random option selection
+      getRandomOptionExcluding: function(selectId, excludeValues) {
+        console.log("Using global helper: getRandomOptionExcluding");
+        const select = document.getElementById(selectId);
+        if (!select) return '';
+        
+        const options = Array.from(select.options);
+        const validOptions = options.filter(option => !excludeValues.includes(option.value));
+        
+        if (validOptions.length === 0) return '';
+        
+        const randomIndex = Math.floor(Math.random() * validOptions.length);
+        return validOptions[randomIndex].value;
+      },
+      
+      // Random chip selection 
+      getRandomChips: function(chipSelectId, count) {
+        console.log("Using global helper: getRandomChips");
+        const chipSelect = document.getElementById(chipSelectId);
+        if (!chipSelect) return '';
+        
+        const chips = Array.from(chipSelect.querySelectorAll('.chip'));
+        
+        // Shuffle
+        for (let i = chips.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [chips[i], chips[j]] = [chips[j], chips[i]];
+        }
+        
+        const selectedChips = chips.slice(0, Math.min(count, chips.length));
+        return selectedChips.map(chip => chip.dataset.value).join(', ');
+      },
+      
+      // Update UI for chips
+      updateChipSelectionUI: function(selectId, selectedValues) {
+        console.log("Using global helper: updateChipSelectionUI");
+        const chipSelect = document.getElementById(selectId);
+        if (!chipSelect) return;
+        
+        const values = selectedValues.split(',').map(v => v.trim());
+        const chips = chipSelect.querySelectorAll('.chip');
+        
+        chips.forEach(chip => chip.classList.remove('selected'));
+        chips.forEach(chip => {
+          if (values.includes(chip.dataset.value)) {
+            chip.classList.add('selected');
+          }
+        });
+      },
+      
+      // Random multiselect generation
+      generateRandomMultiSelect: function(selectId, hiddenInputId, minItems, maxItems) {
+        console.log("Using global helper: generateRandomMultiSelect");
+        const count = minItems + Math.floor(Math.random() * (maxItems - minItems + 1));
+        const selectedItems = this.getRandomChips(selectId, count);
+        
+        const hiddenInput = document.getElementById(hiddenInputId);
+        if (hiddenInput) hiddenInput.value = selectedItems;
+        
+        this.updateChipSelectionUI(selectId, selectedItems);
+      }
+    };
+  </script>
+`);
+
 // Add a special standalone initialization script
 $('body').append(`
   <script>
@@ -159,6 +232,19 @@ $('body').append(`
         return originalFetch(url, options);
       };
       
+      // Ensure core functions are available globally
+      if (typeof window.generateRandomOptionExcluding !== 'function') {
+        window.generateRandomOptionExcluding = window.PersonaMateHelpers.getRandomOptionExcluding;
+      }
+      
+      if (typeof window.generateRandomMultiSelect !== 'function') {
+        window.generateRandomMultiSelect = window.PersonaMateHelpers.generateRandomMultiSelect;
+      }
+      
+      if (typeof window.updateChipSelectionUI !== 'function') {
+        window.updateChipSelectionUI = window.PersonaMateHelpers.updateChipSelectionUI;
+      }
+      
       // Make sure initialization happens even if module loading fails
       setTimeout(function() {
         if (window.initializePersonaMate && !window.isPersonaMateInitialized) {
@@ -173,14 +259,22 @@ $('body').append(`
           document.querySelectorAll('.btn-random, #generateRandomBtn').forEach(btn => {
             btn.addEventListener('click', function() {
               console.log("Random button clicked");
-              alert("Button clicked! If you're seeing this, there might be an issue with the JavaScript modules. Please check the console for errors.");
+              if (typeof window.generateRandomPersonality === 'function') {
+                window.generateRandomPersonality();
+              } else {
+                alert("Button clicked! If you're seeing this, there might be an issue with the JavaScript modules.");
+              }
             });
           });
           
           document.querySelectorAll('.btn-generate, #generateBtn').forEach(btn => {
             btn.addEventListener('click', function() {
               console.log("Generate button clicked");
-              alert("Button clicked! If you're seeing this, there might be an issue with the JavaScript modules. Please check the console for errors.");
+              if (typeof window.generatePersonality === 'function') {
+                window.generatePersonality();
+              } else {
+                alert("Button clicked! If you're seeing this, there might be an issue with the JavaScript modules.");
+              }
             });
           });
         }

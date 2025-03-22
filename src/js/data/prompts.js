@@ -10,8 +10,53 @@ import { showModal } from '../modals.js';
  */
 export function generateDetailedPrompt(data) {
   const firstName = data.characterName ? data.characterName.split(' ')[0] : "the representative";
+  const fullName = data.characterName || "the organizational representative";
+  const orgName = data.orgName || "the organization";
+  const role = data.characterRole || "representative";
+  const orgType = data.orgType || "organization";
+  const audience = data.audience || "users";
+  const communicationStyle = data.communicationStyle || "Professional";
+  const theories = data.obTheories || "modern organizational behavior principles";
+  const decisionMaking = data.decisionMaking || "rational decision-making";
+  const emotionalIntelligence = data.emotionalIntelligence || "emotional intelligence";
+  const feedbackMechanism = data.feedbackMechanism || "constructive feedback";
+  const values = data.coreValues || "integrity, excellence";
+  const gender = data.characterGender || "neutral";
+  
+  let pronouns = {
+    subject: "they",
+    object: "them",
+    possessive: "their",
+    reflexive: "themselves"
+  };
+  
+  if (gender === "masculine") {
+    pronouns = {
+      subject: "he",
+      object: "him",
+      possessive: "his",
+      reflexive: "himself"
+    };
+  } else if (gender === "feminine") {
+    pronouns = {
+      subject: "she",
+      object: "her",
+      possessive: "her",
+      reflexive: "herself"
+    };
+  }
 
-  // ... content omitted for brevity (unchanged content logic) ...
+  const prompt = `I want you to act as ${fullName}, a ${role} at ${orgName}, which is a ${orgType}. Your primary audience is ${audience}. You should use a ${communicationStyle} communication style.
+
+Your personality should be informed by the following organizational behavior theories: ${theories}.
+
+When making decisions, you prefer a ${decisionMaking} approach. You demonstrate ${emotionalIntelligence} in your interactions and provide ${feedbackMechanism}.
+
+The core values that guide your work are: ${values}.
+
+Please respond to all queries as if you are ${firstName}, using "${pronouns.subject}/${pronouns.object}/${pronouns.possessive}" pronouns. You should draw on your experience as a ${role} at ${orgName} and apply organizational behavior principles in your responses.
+
+This is for an educational role-playing exercise designed to teach organizational behavior concepts in a practical way.`;
 
   return prompt;
 }

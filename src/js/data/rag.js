@@ -94,7 +94,76 @@ export function collectFormData() {
  */
 export function generateRAGDocs(data) {
   console.log("RAG document generation requested");
-  alert("RAG document generation functionality is coming soon!");
+  
+  // Import showModal if available
+  let showModal;
+  try {
+    showModal = window.showModal || (typeof import === 'function' ? import('../modals.js').then(m => m.showModal) : null);
+  } catch (e) {
+    console.warn("Could not import showModal:", e);
+  }
+  
+  // Generate basic RAG document
+  const firstName = data.characterName ? data.characterName.split(' ')[0] : "the representative";
+  const fullName = data.characterName || "the organizational representative";
+  const orgName = data.orgName || "the organization";
+  const role = data.characterRole || "representative";
+  const orgType = data.orgType || "organization";
+  const theories = data.obTheories ? data.obTheories.split(',').map(t => t.trim()) : ["organizational behavior principles"];
+  
+  // Create a structured RAG document
+  const ragDoc = `# ${fullName} - Personality Profile
+
+## Organizational Context
+- **Organization**: ${orgName} (${orgType})
+- **Role**: ${role}
+- **Primary Audience**: ${data.audience || "Various stakeholders"}
+
+## Demographic Information
+- **Name**: ${fullName}
+- **Age Range**: ${data.characterAge || "Adult"}
+- **Gender**: ${data.characterGender || "Not specified"}
+
+## Theoretical Foundations
+${theories.map(theory => `- ${theory}`).join('\n')}
+
+## Communication Approach
+- **Style**: ${data.communicationStyle || "Professional"}
+- **Conflict Resolution**: ${data.conflictResolution || "Collaborative"}
+- **Negotiation Method**: ${data.negotiationMethod || "Win-win approach"}
+- **Decision-Making**: ${data.decisionMaking || "Rational process"}
+
+## Emotional Intelligence
+- **EI Framework**: ${data.emotionalIntelligence || "Self-awareness and empathy"}
+- **Feedback Mechanism**: ${data.feedbackMechanism || "Constructive and balanced"}
+
+## Values
+${data.coreValues ? data.coreValues.split(',').map(v => `- ${v.trim()}`).join('\n') : "- Integrity\n- Excellence"}
+
+## Application Contexts
+- Training scenarios
+- Role-play simulations
+- Behavioral modeling
+- Communication exercises
+`;
+
+  // Display in modal if available, otherwise fall back to alert
+  if (typeof showModal === 'function') {
+    showModal({
+      title: 'RAG Document for ' + fullName,
+      content: ragDoc,
+      instructions: `
+        <p>This document can be used as a reference knowledge document for Retrieval Augmented Generation (RAG) systems.</p>
+        <p>You can copy this document and use it as part of your RAG corpus to improve AI responses when simulating this personality.</p>
+      `,
+      copyButtonText: 'Copy Document',
+      contentClass: 'rag-content'
+    });
+  } else {
+    // Fallback if modal system isn't available
+    console.warn("Modal system not available, using basic alert");
+    alert("RAG Document Generated:\n\n" + ragDoc + "\n\n(Copy this text to use with your RAG system)");
+  }
 }
 
 /**

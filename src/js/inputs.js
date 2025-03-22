@@ -15,9 +15,13 @@ export function setupChipSelectors() {
 
     chips.forEach(chip => {
       chip.addEventListener('click', () => {
-        chips.forEach(c => c.classList.remove('selected'));
-        chip.classList.add('selected');
-        input.value = chip.dataset.value;
+        // Toggle the 'selected' class instead of removing from all
+        chip.classList.toggle('selected');
+        
+        // Update the hidden input with all selected values
+        const selectedChips = container.querySelectorAll('.chip.selected');
+        const selectedValues = Array.from(selectedChips).map(c => c.dataset.value);
+        input.value = selectedValues.join(', ');
       });
     });
   });
