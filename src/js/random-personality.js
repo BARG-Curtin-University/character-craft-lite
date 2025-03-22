@@ -1,8 +1,105 @@
-import { getRandomOptionExcluding, generateRandomMultiSelect } from './inputs.js';
-import { generateRandomOrgName } from './data/models.js';
+// Import required functions
 import { generatePersonality } from './generation.js';
 import { collectFormData } from './data/rag.js';
 import { resetForm } from './export.js';
+
+// Define directly to avoid import issues in standalone version
+function generateRandomOptionExcluding(selectId, excludeValues) {
+  console.log("Using inline generateRandomOptionExcluding function");
+  const select = document.getElementById(selectId);
+  if (!select) {
+    console.warn(`Select element with id ${selectId} not found`);
+    return '';
+  }
+
+  const options = Array.from(select.options);
+  const validOptions = options.filter(option => !excludeValues.includes(option.value));
+
+  if (validOptions.length === 0) {
+    console.warn(`No valid options found for ${selectId} after excluding ${excludeValues}`);
+    return '';
+  }
+
+  const randomIndex = Math.floor(Math.random() * validOptions.length);
+  return validOptions[randomIndex].value;
+}
+
+// Define helper for random multi-select
+function generateRandomMultiSelect(selectId, hiddenInputId, minItems, maxItems) {
+  console.log("Using inline generateRandomMultiSelect function");
+  // Calculate random number of items to select
+  const count = minItems + Math.floor(Math.random() * (maxItems - minItems + 1));
+
+  // Get random selections
+  const selectedItems = getRandomChips(selectId, count);
+
+  // Update hidden input value
+  const hiddenInput = document.getElementById(hiddenInputId);
+  if (hiddenInput) {
+    hiddenInput.value = selectedItems;
+  } else {
+    console.warn(`Hidden input with id ${hiddenInputId} not found`);
+  }
+
+  // Update UI to show selected chips
+  updateChipSelectionUI(selectId, selectedItems);
+}
+
+// Helper function for getting random chips
+function getRandomChips(chipSelectId, count) {
+  console.log("Using inline getRandomChips function");
+  const chipSelect = document.getElementById(chipSelectId);
+  if (!chipSelect) {
+    console.warn(`Chip select with id ${chipSelectId} not found`);
+    return '';
+  }
+
+  const chips = Array.from(chipSelect.querySelectorAll('.chip'));
+  if (chips.length === 0) {
+    console.warn(`No chips found in ${chipSelectId}`);
+    return '';
+  }
+
+  // Shuffle using Fisher-Yates
+  for (let i = chips.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [chips[i], chips[j]] = [chips[j], chips[i]];
+  }
+
+  const selectedChips = chips.slice(0, Math.min(count, chips.length));
+  return selectedChips.map(chip => chip.dataset.value).join(', ');
+}
+
+// Helper for updating UI
+function updateChipSelectionUI(selectId, selectedValues) {
+  console.log("Using inline updateChipSelectionUI function");
+  const chipSelect = document.getElementById(selectId);
+  if (!chipSelect) {
+    console.warn(`Chip select with id ${selectId} not found`);
+    return;
+  }
+
+  if (!selectedValues) {
+    console.warn(`No selected values provided for ${selectId}`);
+    return;
+  }
+
+  const values = selectedValues.split(',').map(v => v.trim());
+  const chips = chipSelect.querySelectorAll('.chip');
+  
+  // First, clear all selected chips
+  chips.forEach(chip => chip.classList.remove('selected'));
+  
+  // Then, select the chips that match the values
+  chips.forEach(chip => {
+    if (values.includes(chip.dataset.value)) {
+      chip.classList.add('selected');
+    }
+  });
+}
+
+// Import these as needed
+import { generateRandomOrgName } from './data/models.js';
 
 export function generateRandomPersonality() {
   console.log("✅ generateRandomPersonality called");
@@ -65,4 +162,9 @@ export function generateRandomPersonality() {
   } catch (error) {
     console.error("❌ Error in generateRandomPersonality:", error);
   }
+}
+
+// Make function globally available for standalone version
+if (typeof window !== 'undefined') {
+  window.generateRandomPersonality = generateRandomPersonality;
 }

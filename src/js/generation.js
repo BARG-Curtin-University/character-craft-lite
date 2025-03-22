@@ -4,14 +4,45 @@ console.log("✅ generatePersonality loaded");
 import { collectFormData } from './data/rag.js';
 
 /**
+ * Creates a single summary item for the personality profile
+ */
+function createSummaryItem(label, value) {
+  return `<div class="summary-item"><span class="label">${label}:</span> <span class="value">${value}</span></div>`;
+}
+
+// Make the helper function globally available for standalone version
+if (typeof window !== 'undefined') {
+  window.createSummaryItem = createSummaryItem;
+}
+
+/**
  * Generates a personality profile based on form inputs or random values
  */
-
 export function generatePersonality() {
-  const profileData = collectFormData();
-  generateSummary(profileData);
-  generateDescription(profileData);
-};
+  try {
+    console.log("🧠 Generating personality profile");
+    const profileData = collectFormData();
+    console.log("📊 Collected form data:", profileData);
+    generateSummary(profileData);
+    generateDescription(profileData);
+    
+    // Show the output card
+    const formCard = document.querySelector('.form-card');
+    const outputCard = document.querySelector('.output-card');
+    
+    if (formCard) formCard.style.display = 'none';
+    if (outputCard) outputCard.classList.add('visible');
+    
+    console.log("✅ Personality profile generated successfully");
+  } catch (error) {
+    console.error("❌ Error generating personality profile:", error);
+  }
+}
+
+// Make the function globally available for standalone version
+if (typeof window !== 'undefined') {
+  window.generatePersonality = generatePersonality;
+}
 
 /**
  * Generates the summary HTML and updates the DOM
