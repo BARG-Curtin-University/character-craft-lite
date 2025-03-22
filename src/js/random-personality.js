@@ -2,6 +2,7 @@ import { getRandomOptionExcluding, generateRandomMultiSelect } from './inputs.js
 import { generateRandomOrgName } from './data/models.js';
 import { generatePersonality } from './generation.js';
 import { collectFormData } from './data/rag.js';
+import { resetForm } from './export.js';
 
 export function generateRandomPersonality() {
   console.log("✅ generateRandomPersonality called");
