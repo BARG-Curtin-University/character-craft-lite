@@ -70,190 +70,193 @@ function initializeEventListeners() {
         checkForUpdates("1.0.0"); // fallback to 1.0.0 if version.json not found
       });
 
-  // Bind buttons to imported functions
-  const generateBtn = document.querySelector(".btn-generate");
-  const randomBtn = document.querySelector(".btn-random");
-  const resetBtns = document.querySelectorAll(".btn-reset");
+    // Bind buttons to imported functions
+    const generateBtn = document.querySelector(".btn-generate");
+    const randomBtn = document.querySelector(".btn-random");
+    const resetBtns = document.querySelectorAll(".btn-reset");
 
-  try {
-    const copyBtn = document.querySelector('.btn-copy');
-    if (copyBtn) {
-      copyBtn.addEventListener('click', function(e) {
-        console.log("Copy button clicked");
-        try {
-          copyToClipboard();
-        } catch (err) {
-          console.error("Error in copyToClipboard:", err);
-        }
-      });
-      console.log("Copy button listener added");
-    }
-    
-    const downloadBtn = document.querySelector('.btn-download');
-    if (downloadBtn) {
-      downloadBtn.addEventListener('click', function(e) {
-        console.log("Download button clicked");
-        try {
-          downloadProfile();
-        } catch (err) {
-          console.error("Error in downloadProfile:", err);
-        }
-      });
-      console.log("Download button listener added");
-    }
-    
-    const promptBtn = document.querySelector('.btn-generate-prompt');
-    if (promptBtn) {
-      promptBtn.addEventListener('click', function(e) {
-        console.log("Prompt button clicked");
-        try {
-          generateLLMPrompt();
-        } catch (err) {
-          console.error("Error in generateLLMPrompt:", err);
-        }
-      });
-      console.log("Prompt button listener added");
-    }
-    
-    const ragBtn = document.querySelector('.btn-generate-rag');
-    if (ragBtn) {
-      ragBtn.addEventListener('click', function(e) {
-        console.log("RAG button clicked");
-        try {
-          generateRAGDocument();
-        } catch (err) {
-          console.error("Error in generateRAGDocument:", err);
-        }
-      });
-      console.log("RAG button listener added");
-    }
-  
-    if (resetBtns.length > 0) {
-      resetBtns.forEach(btn => {
-        btn.addEventListener('click', function(e) {
-          console.log("Reset button clicked");
+    try {
+      const copyBtn = document.querySelector('.btn-copy');
+      if (copyBtn) {
+        copyBtn.addEventListener('click', function(e) {
+          console.log("Copy button clicked");
           try {
-            resetForm(true);
+            copyToClipboard();
           } catch (err) {
-            console.error("Error in resetForm:", err);
+            console.error("Error in copyToClipboard:", err);
           }
         });
-      });
-      console.log("Reset button listeners added: " + resetBtns.length);
+        console.log("Copy button listener added");
+      }
+      
+      const downloadBtn = document.querySelector('.btn-download');
+      if (downloadBtn) {
+        downloadBtn.addEventListener('click', function(e) {
+          console.log("Download button clicked");
+          try {
+            downloadProfile();
+          } catch (err) {
+            console.error("Error in downloadProfile:", err);
+          }
+        });
+        console.log("Download button listener added");
+      }
+      
+      const promptBtn = document.querySelector('.btn-generate-prompt');
+      if (promptBtn) {
+        promptBtn.addEventListener('click', function(e) {
+          console.log("Prompt button clicked");
+          try {
+            generateLLMPrompt();
+          } catch (err) {
+            console.error("Error in generateLLMPrompt:", err);
+          }
+        });
+        console.log("Prompt button listener added");
+      }
+      
+      const ragBtn = document.querySelector('.btn-generate-rag');
+      if (ragBtn) {
+        ragBtn.addEventListener('click', function(e) {
+          console.log("RAG button clicked");
+          try {
+            generateRAGDocument();
+          } catch (err) {
+            console.error("Error in generateRAGDocument:", err);
+          }
+        });
+        console.log("RAG button listener added");
+      }
+    
+      if (resetBtns.length > 0) {
+        resetBtns.forEach(btn => {
+          btn.addEventListener('click', function(e) {
+            console.log("Reset button clicked");
+            try {
+              resetForm(true);
+            } catch (err) {
+              console.error("Error in resetForm:", err);
+            }
+          });
+        });
+        console.log("Reset button listeners added: " + resetBtns.length);
+      }
+
+      if (generateBtn) {
+        generateBtn.addEventListener("click", function(e) {
+          console.log("Generate button clicked");
+          try {
+            generatePersonality();
+          } catch (err) {
+            console.error("Error in generatePersonality:", err);
+          }
+        });
+        console.log("Generate button listener added");
+      }
+
+      if (randomBtn) {
+        randomBtn.addEventListener("click", function(e) {
+          console.log("Random button clicked");
+          try {
+            generateRandomPersonality();
+          } catch (err) {
+            console.error("Error in generateRandomPersonality:", err);
+          }
+        });
+        console.log("Random button listener added");
+      }
+    } catch (err) {
+      console.error("Error setting up button listeners:", err);
     }
 
-    if (generateBtn) {
-      generateBtn.addEventListener("click", function(e) {
-        console.log("Generate button clicked");
-        try {
-          generatePersonality();
-        } catch (err) {
-          console.error("Error in generatePersonality:", err);
-        }
-      });
-      console.log("Generate button listener added");
-    }
+    // Set up navigation buttons
+    try {
+      const nextButtons = document.querySelectorAll('.btn-next');
+      if (nextButtons.length > 0) {
+        nextButtons.forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            console.log("Next button clicked");
+            try {
+              const currentSection = document.querySelector('.form-section.active');
+              console.log("Current section:", currentSection?.dataset?.section);
+              
+              if (!currentSection) {
+                console.error("No active section found");
+                return;
+              }
+              
+              const nextSection = currentSection.nextElementSibling;
+              console.log("Next section:", nextSection?.dataset?.section);
+              
+              if (nextSection && nextSection.classList.contains('form-section')) {
+                currentSection.classList.remove('active');
+                nextSection.classList.add('active');
+                
+                // Update progress dots
+                const currentDot = document.querySelector(`.progress-dot[data-section="${currentSection.dataset.section}"]`);
+                const nextDot = document.querySelector(`.progress-dot[data-section="${nextSection.dataset.section}"]`);
+                
+                console.log("Current dot:", currentDot);
+                console.log("Next dot:", nextDot);
+                
+                if (currentDot) currentDot.classList.remove('active');
+                if (nextDot) nextDot.classList.add('active');
+              } else {
+                console.warn("No next section found or it's not a form section");
+              }
+            } catch (err) {
+              console.error("Error in next button handler:", err);
+            }
+          });
+        });
+        console.log("Next button listeners added: " + nextButtons.length);
+      }
 
-    if (randomBtn) {
-      randomBtn.addEventListener("click", function(e) {
-        console.log("Random button clicked");
-        try {
-          generateRandomPersonality();
-        } catch (err) {
-          console.error("Error in generateRandomPersonality:", err);
-        }
-      });
-      console.log("Random button listener added");
+      const prevButtons = document.querySelectorAll('.btn-prev');
+      if (prevButtons.length > 0) {
+        prevButtons.forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            console.log("Prev button clicked");
+            try {
+              const currentSection = document.querySelector('.form-section.active');
+              console.log("Current section:", currentSection?.dataset?.section);
+              
+              if (!currentSection) {
+                console.error("No active section found");
+                return;
+              }
+              
+              const prevSection = currentSection.previousElementSibling;
+              console.log("Previous section:", prevSection?.dataset?.section);
+              
+              if (prevSection && prevSection.classList.contains('form-section')) {
+                currentSection.classList.remove('active');
+                prevSection.classList.add('active');
+                
+                // Update progress dots
+                const currentDot = document.querySelector(`.progress-dot[data-section="${currentSection.dataset.section}"]`);
+                const prevDot = document.querySelector(`.progress-dot[data-section="${prevSection.dataset.section}"]`);
+                
+                console.log("Current dot:", currentDot);
+                console.log("Previous dot:", prevDot);
+                
+                if (currentDot) currentDot.classList.remove('active');
+                if (prevDot) prevDot.classList.add('active');
+              } else {
+                console.warn("No previous section found or it's not a form section");
+              }
+            } catch (err) {
+              console.error("Error in prev button handler:", err);
+            }
+          });
+        });
+        console.log("Prev button listeners added: " + prevButtons.length);
+      }
+    } catch (err) {
+      console.error("Error setting up navigation buttons:", err);
     }
   } catch (err) {
-    console.error("Error setting up button listeners:", err);
-  }
-
-  // Set up navigation buttons
-  try {
-    const nextButtons = document.querySelectorAll('.btn-next');
-    if (nextButtons.length > 0) {
-      nextButtons.forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          console.log("Next button clicked");
-          try {
-            const currentSection = document.querySelector('.form-section.active');
-            console.log("Current section:", currentSection?.dataset?.section);
-            
-            if (!currentSection) {
-              console.error("No active section found");
-              return;
-            }
-            
-            const nextSection = currentSection.nextElementSibling;
-            console.log("Next section:", nextSection?.dataset?.section);
-            
-            if (nextSection && nextSection.classList.contains('form-section')) {
-              currentSection.classList.remove('active');
-              nextSection.classList.add('active');
-              
-              // Update progress dots
-              const currentDot = document.querySelector(`.progress-dot[data-section="${currentSection.dataset.section}"]`);
-              const nextDot = document.querySelector(`.progress-dot[data-section="${nextSection.dataset.section}"]`);
-              
-              console.log("Current dot:", currentDot);
-              console.log("Next dot:", nextDot);
-              
-              if (currentDot) currentDot.classList.remove('active');
-              if (nextDot) nextDot.classList.add('active');
-            } else {
-              console.warn("No next section found or it's not a form section");
-            }
-          } catch (err) {
-            console.error("Error in next button handler:", err);
-          }
-        });
-      });
-      console.log("Next button listeners added: " + nextButtons.length);
-    }
-
-    const prevButtons = document.querySelectorAll('.btn-prev');
-    if (prevButtons.length > 0) {
-      prevButtons.forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          console.log("Prev button clicked");
-          try {
-            const currentSection = document.querySelector('.form-section.active');
-            console.log("Current section:", currentSection?.dataset?.section);
-            
-            if (!currentSection) {
-              console.error("No active section found");
-              return;
-            }
-            
-            const prevSection = currentSection.previousElementSibling;
-            console.log("Previous section:", prevSection?.dataset?.section);
-            
-            if (prevSection && prevSection.classList.contains('form-section')) {
-              currentSection.classList.remove('active');
-              prevSection.classList.add('active');
-              
-              // Update progress dots
-              const currentDot = document.querySelector(`.progress-dot[data-section="${currentSection.dataset.section}"]`);
-              const prevDot = document.querySelector(`.progress-dot[data-section="${prevSection.dataset.section}"]`);
-              
-              console.log("Current dot:", currentDot);
-              console.log("Previous dot:", prevDot);
-              
-              if (currentDot) currentDot.classList.remove('active');
-              if (prevDot) prevDot.classList.add('active');
-            } else {
-              console.warn("No previous section found or it's not a form section");
-            }
-          } catch (err) {
-            console.error("Error in prev button handler:", err);
-          }
-        });
-      });
-      console.log("Prev button listeners added: " + prevButtons.length);
-    }
-  } catch (err) {
-    console.error("Error setting up navigation buttons:", err);
+    console.error("General initialization error:", err);
   }
 }
 
