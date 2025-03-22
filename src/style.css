@@ -8,7 +8,7 @@
  * CSS Variables for consistent theming
  */
 :root {
-  --primary-color: #4a6fa5;
+  --primary-color: #4a90e2;
   --secondary-color: #6b96c9;
   --accent-color: #f39c12;
   --light-bg: #f7f9fc;
@@ -50,11 +50,6 @@ body {
 }
 
 
-/*.main-content {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-}*/
 .main-content {
   display: flex;
   justify-content: center;
@@ -98,12 +93,12 @@ h1 {
 }
 
 .brand-part1 {
-  color: #4a90e2;
+  color: --primary-color;
   font-weight: bold;
 }
 
 .brand-part2 {
-  color: #f39c12;
+  color: --accent-color;
   font-weight: bold;
 }
 
@@ -385,7 +380,7 @@ button {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  background-color: white;
+  background-color: --primary-color;
   border: 1px solid #cbd5e0;
   color: var(--dark-text);
 }
