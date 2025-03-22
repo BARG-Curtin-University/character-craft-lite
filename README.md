@@ -3,6 +3,10 @@
 
 PersonaMate is a personality configuration tool for creating structured chatbot personas for use in RAG pipelines, zero-shot prompt templates, and educational or enterprise-grade conversational agents.
 
+### Quick Links
+- [Live Web App](https://barg-curtin-university.github.io/personamate-lite/)
+- [Standalone Version](https://barg-curtin-university.github.io/personamate-lite/personamate-standalone.html) (single HTML file you can download and use offline)
+
 ### 🔧 Features
 - 🎭 Define chatbot personality traits including tone, role, communication style, and values
 - 📚 Incorporate OB theory (e.g., Maslow, Tuckman, Servant Leadership)
