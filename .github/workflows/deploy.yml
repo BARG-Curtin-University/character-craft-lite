@@ -34,9 +34,13 @@ jobs:
       - name: Install dependencies
         run: npm ci
       
-      - name: Build Single File
-        run: npm run build:single
-        # This will create a single index.html file in the dist directory
+      - name: Build PWA Version
+        run: npm run build:pwa
+        # This will create PWA-optimized files in the dist directory with Workbox for service worker
+
+      - name: Create Standalone Version
+        run: npm run bundle
+        # This will create a standalone HTML file in the standalone directory
       
       - name: Setup Pages
         uses: actions/configure-pages@v4
