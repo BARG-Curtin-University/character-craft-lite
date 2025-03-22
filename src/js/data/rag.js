@@ -95,14 +95,6 @@ export function collectFormData() {
 export function generateRAGDocs(data) {
   console.log("RAG document generation requested");
   
-  // Import showModal if available
-  let showModal;
-  try {
-    showModal = window.showModal || (typeof import === 'function' ? import('../modals.js').then(m => m.showModal) : null);
-  } catch (e) {
-    console.warn("Could not import showModal:", e);
-  }
-  
   // Generate basic RAG document
   const firstName = data.characterName ? data.characterName.split(' ')[0] : "the representative";
   const fullName = data.characterName || "the organizational representative";
@@ -147,9 +139,9 @@ ${data.coreValues ? data.coreValues.split(',').map(v => `- ${v.trim()}`).join('\
 - Communication exercises
 `;
 
-  // Display in modal if available, otherwise fall back to alert
-  if (typeof showModal === 'function') {
-    showModal({
+  // Display result - first try to use the pre-imported showModal function
+  if (typeof window.showModal === 'function') {
+    window.showModal({
       title: 'RAG Document for ' + fullName,
       content: ragDoc,
       instructions: `
