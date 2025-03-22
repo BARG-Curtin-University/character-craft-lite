@@ -33,7 +33,16 @@ function inlineResources() {
       const jsPath = path.join(distDir, src);
       if (fs.existsSync(jsPath)) {
         const js = fs.readFileSync(jsPath, 'utf8');
-        $(el).replaceWith(`<script>${js}</script>`);
+        // Replace import.meta.url with window.location.href
+        const fixedJs = js.replace(/import\.meta\.url/g, 
+          "window.location.href /* STANDALONE: replaced import.meta.url */");
+        // Keep the script as a module if it was a module
+        const scriptType = $(el).attr('type') || '';
+        if (scriptType === 'module') {
+          $(el).replaceWith(`<script type="module">${fixedJs}</script>`);
+        } else {
+          $(el).replaceWith(`<script>${fixedJs}</script>`);
+        }
       }
     }
   });
@@ -76,6 +85,41 @@ function inlineResources() {
 
 // Inline all resources
 inlineResources();
+
+// Add a special standalone initialization script
+$('body').append(`
+  <script>
+    // Special initialization for standalone version
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log("Standalone initialization starting");
+      
+      // Make sure initialization happens even if module loading fails
+      setTimeout(function() {
+        if (window.initializePersonaMate) {
+          console.log("Running initialization from standalone script");
+          window.initializePersonaMate();
+        } else {
+          console.warn("Standalone fallback: creating basic button handlers");
+          
+          // Basic button handlers if the module system fails
+          document.querySelectorAll('.btn-random, #generateRandomBtn').forEach(btn => {
+            btn.addEventListener('click', function() {
+              console.log("Random button clicked");
+              alert("Button clicked! If you're seeing this, there might be an issue with the JavaScript modules. Please check the console for errors.");
+            });
+          });
+          
+          document.querySelectorAll('.btn-generate, #generateBtn').forEach(btn => {
+            btn.addEventListener('click', function() {
+              console.log("Generate button clicked");
+              alert("Button clicked! If you're seeing this, there might be an issue with the JavaScript modules. Please check the console for errors.");
+            });
+          });
+        }
+      }, 1000);
+    });
+  </script>
+`);
 
 // Create a standalone HTML file
 const standaloneHtml = $.html();
