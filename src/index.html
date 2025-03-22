@@ -313,11 +313,11 @@
     
     // Add a slight delay to ensure module script has had a chance to run
     setTimeout(function() {
-      if (window.initializePersonaMate) {
+      if (window.initializeCharacterCraft) {
         console.log("Running initialization from fallback script");
-        window.initializePersonaMate();
+        window.initializeCharacterCraft();
       } else {
-        console.warn("initializePersonaMate not available in fallback script");
+        console.warn("initializeCharacterCraft not available in fallback script");
       }
     }, 1000);
   });

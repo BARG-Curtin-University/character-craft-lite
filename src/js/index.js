@@ -3,6 +3,7 @@
 // 📦 Core logic (utility-first)
 import './utils.js';
 import './data/models.js';
+import { log, logError } from './utils.js';
 
 // 🖼️ DOM setup (must happen early if others rely on it)
 import './dom.js';
@@ -37,11 +38,11 @@ document.addEventListener('DOMContentLoaded', () => {
 // Make sure the event listeners work regardless of how the app is loaded
 function initializeEventListeners() {
   try {
-    console.log("✅ PersonaMate initialization starting");
+    log("✅ CharacterCraft initialization starting");
     
     // Debug info
-    console.log("Document readyState:", document.readyState);
-    console.log("Available buttons:", {
+    log("Document readyState:", document.readyState);
+    log("Available buttons:", {
       generate: !!document.querySelector(".btn-generate"),
       generateById: !!document.getElementById("generateBtn"),
       random: !!document.querySelector(".btn-random"),
@@ -57,7 +58,7 @@ function initializeEventListeners() {
     });
     
     // Check that functions are properly defined
-    console.log("Function availability:", {
+    log("Function availability:", {
       generatePersonality: typeof generatePersonality === 'function',
       generateRandomPersonality: typeof generateRandomPersonality === 'function',
       resetForm: typeof resetForm === 'function',
@@ -72,7 +73,7 @@ function initializeEventListeners() {
       .then(res => res.json())
       .then(data => checkForUpdates(data.version))
       .catch(err => {
-        console.warn("Version check failed:", err);
+        logError("Version check failed:", err);
         checkForUpdates("1.0.0"); // fallback to 1.0.0 if version.json not found
       });
 
@@ -85,94 +86,94 @@ function initializeEventListeners() {
       const copyBtn = document.querySelector('.btn-copy');
       if (copyBtn) {
         copyBtn.addEventListener('click', function(e) {
-          console.log("Copy button clicked");
+          log("Copy button clicked");
           try {
             copyToClipboard();
           } catch (err) {
-            console.error("Error in copyToClipboard:", err);
+            logError("Error in copyToClipboard:", err);
           }
         });
-        console.log("Copy button listener added");
+        log("Copy button listener added");
       }
       
       const downloadBtn = document.querySelector('.btn-download');
       if (downloadBtn) {
         downloadBtn.addEventListener('click', function(e) {
-          console.log("Download button clicked");
+          log("Download button clicked");
           try {
             downloadProfile();
           } catch (err) {
-            console.error("Error in downloadProfile:", err);
+            logError("Error in downloadProfile:", err);
           }
         });
-        console.log("Download button listener added");
+        log("Download button listener added");
       }
       
       const promptBtn = document.querySelector('.btn-generate-prompt');
       if (promptBtn) {
         promptBtn.addEventListener('click', function(e) {
-          console.log("Prompt button clicked");
+          log("Prompt button clicked");
           try {
             generateLLMPrompt();
           } catch (err) {
-            console.error("Error in generateLLMPrompt:", err);
+            logError("Error in generateLLMPrompt:", err);
           }
         });
-        console.log("Prompt button listener added");
+        log("Prompt button listener added");
       }
       
       const ragBtn = document.querySelector('.btn-generate-rag');
       if (ragBtn) {
         ragBtn.addEventListener('click', function(e) {
-          console.log("RAG button clicked");
+          log("RAG button clicked");
           try {
             generateRAGDocument();
           } catch (err) {
-            console.error("Error in generateRAGDocument:", err);
+            logError("Error in generateRAGDocument:", err);
           }
         });
-        console.log("RAG button listener added");
+        log("RAG button listener added");
       }
     
       if (resetBtns.length > 0) {
         resetBtns.forEach(btn => {
           btn.addEventListener('click', function(e) {
-            console.log("Reset button clicked");
+            log("Reset button clicked");
             try {
               resetForm(true);
             } catch (err) {
-              console.error("Error in resetForm:", err);
+              logError("Error in resetForm:", err);
             }
           });
         });
-        console.log("Reset button listeners added: " + resetBtns.length);
+        log("Reset button listeners added: " + resetBtns.length);
       }
 
       if (generateBtn) {
         generateBtn.addEventListener("click", function(e) {
-          console.log("Generate button clicked");
+          log("Generate button clicked");
           try {
             generatePersonality();
           } catch (err) {
-            console.error("Error in generatePersonality:", err);
+            logError("Error in generatePersonality:", err);
           }
         });
-        console.log("Generate button listener added");
+        log("Generate button listener added");
       }
 
       if (randomBtn) {
         randomBtn.addEventListener("click", function(e) {
-          console.log("Random button clicked");
+          log("Random button clicked");
           try {
             generateRandomPersonality();
           } catch (err) {
-            console.error("Error in generateRandomPersonality:", err);
+            logError("Error in generateRandomPersonality:", err);
           }
         });
-        console.log("Random button listener added");
+        log("Random button listener added");
       }
     } catch (err) {
-      console.error("Error setting up button listeners:", err);
+      logError("Error setting up button listeners:", err);
     }
 
     // Set up navigation buttons
@@ -181,18 +182,18 @@ function initializeEventListeners() {
       if (nextButtons.length > 0) {
         nextButtons.forEach(btn => {
           btn.addEventListener('click', (e) => {
-            console.log("Next button clicked");
+            log("Next button clicked");
             try {
               const currentSection = document.querySelector('.form-section.active');
-              console.log("Current section:", currentSection?.dataset?.section);
+              log("Current section:", currentSection?.dataset?.section);
               
               if (!currentSection) {
-                console.error("No active section found");
+                logError("No active section found");
                 return;
               }
               
               const nextSection = currentSection.nextElementSibling;
-              console.log("Next section:", nextSection?.dataset?.section);
+              log("Next section:", nextSection?.dataset?.section);
               
               if (nextSection && nextSection.classList.contains('form-section')) {
                 currentSection.classList.remove('active');
@@ -202,38 +203,38 @@ function initializeEventListeners() {
                 const currentDot = document.querySelector(`.progress-dot[data-section="${currentSection.dataset.section}"]`);
                 const nextDot = document.querySelector(`.progress-dot[data-section="${nextSection.dataset.section}"]`);
                 
-                console.log("Current dot:", currentDot);
-                console.log("Next dot:", nextDot);
+                log("Current dot:", currentDot);
+                log("Next dot:", nextDot);
                 
                 if (currentDot) currentDot.classList.remove('active');
                 if (nextDot) nextDot.classList.add('active');
               } else {
-                console.warn("No next section found or it's not a form section");
+                log("No next section found or it's not a form section");
               }
             } catch (err) {
-              console.error("Error in next button handler:", err);
+              logError("Error in next button handler:", err);
             }
           });
         });
-        console.log("Next button listeners added: " + nextButtons.length);
+        log("Next button listeners added: " + nextButtons.length);
       }
 
       const prevButtons = document.querySelectorAll('.btn-prev');
       if (prevButtons.length > 0) {
         prevButtons.forEach(btn => {
           btn.addEventListener('click', (e) => {
-            console.log("Prev button clicked");
+            log("Prev button clicked");
             try {
               const currentSection = document.querySelector('.form-section.active');
-              console.log("Current section:", currentSection?.dataset?.section);
+              log("Current section:", currentSection?.dataset?.section);
               
               if (!currentSection) {
-                console.error("No active section found");
+                logError("No active section found");
                 return;
               }
               
               const prevSection = currentSection.previousElementSibling;
-              console.log("Previous section:", prevSection?.dataset?.section);
+              log("Previous section:", prevSection?.dataset?.section);
               
               if (prevSection && prevSection.classList.contains('form-section')) {
                 currentSection.classList.remove('active');
@@ -243,40 +244,40 @@ function initializeEventListeners() {
                 const currentDot = document.querySelector(`.progress-dot[data-section="${currentSection.dataset.section}"]`);
                 const prevDot = document.querySelector(`.progress-dot[data-section="${prevSection.dataset.section}"]`);
                 
-                console.log("Current dot:", currentDot);
-                console.log("Previous dot:", prevDot);
+                log("Current dot:", currentDot);
+                log("Previous dot:", prevDot);
                 
                 if (currentDot) currentDot.classList.remove('active');
                 if (prevDot) prevDot.classList.add('active');
               } else {
-                console.warn("No previous section found or it's not a form section");
+                log("No previous section found or it's not a form section");
               }
             } catch (err) {
-              console.error("Error in prev button handler:", err);
+              logError("Error in prev button handler:", err);
             }
           });
         });
-        console.log("Prev button listeners added: " + prevButtons.length);
+        log("Prev button listeners added: " + prevButtons.length);
       }
     } catch (err) {
-      console.error("Error setting up navigation buttons:", err);
+      logError("Error setting up navigation buttons:", err);
     }
   } catch (err) {
-    console.error("General initialization error:", err);
+    logError("General initialization error:", err);
   }
 }
 
 // Flag to track if initialization has already happened
-window.isPersonaMateInitialized = false;
+window.isCharacterCraftInitialized = false;
 
 // Wrapper function to prevent multiple initializations
 function safeInitialize() {
-  if (window.isPersonaMateInitialized) {
-    console.log("PersonaMate already initialized, skipping");
+  if (window.isCharacterCraftInitialized) {
+    log("CharacterCraft already initialized, skipping");
     return;
   }
   
-  window.isPersonaMateInitialized = true;
+  window.isCharacterCraftInitialized = true;
   initializeEventListeners();
 }
 
@@ -285,21 +286,21 @@ document.addEventListener('DOMContentLoaded', safeInitialize);
 
 // Also provide a way to manually initialize in case the DOMContentLoaded event
 // has already fired by the time the script runs (which can happen in some bundling scenarios)
-window.initializePersonaMate = safeInitialize;
+window.initializeCharacterCraft = safeInitialize;
 
 // If the document is already loaded, run initialization immediately
 if (document.readyState === 'complete' || document.readyState === 'interactive') {
-  console.log("Document already ready, initializing with delay");
+  log("Document already ready, initializing with delay");
   setTimeout(safeInitialize, 500); // Small delay to ensure DOM is fully processed
 }
 
 // Add a global error handler to catch any JS errors
 window.addEventListener('error', function(event) {
-  console.error('Global error caught:', event.error);
+  logError('Global error caught:', event.error);
   return false;
 });
 
 // Add manual initialization via console for debugging
-console.log("Debug tip: You can manually initialize by typing window.initializePersonaMate() in the console");
+log("Debug tip: You can manually initialize by typing window.initializeCharacterCraft() in the console");
 
 // Debug initialization is disabled in production

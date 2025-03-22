@@ -1,5 +1,25 @@
 // utils.js - ES6 module version
 
+// Set this to true to enable debug logging, false to disable all console.log outputs
+export const DEBUG = false;
+
+/**
+ * Logger utility that only outputs when DEBUG is true
+ * Use this instead of console.log throughout the application
+ */
+export function log(...args) {
+  if (DEBUG) {
+    console.log(...args);
+  }
+}
+
+/**
+ * Error logger - always log errors regardless of DEBUG setting
+ */
+export function logError(...args) {
+  console.error(...args);
+}
+
 /**
  * Creates a summary item HTML for display
  */
@@ -57,5 +77,4 @@ export function debounce(func, wait) {
     timeout = setTimeout(later, wait);
   };
 }
-
 

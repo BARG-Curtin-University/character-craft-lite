@@ -1,7 +1,8 @@
 // generation.js - ES6+ version
-console.log("✅ generatePersonality loaded");
-
+import { log, logError } from './utils.js';
 import { collectFormData } from './data/rag.js';
+
+log("✅ generatePersonality loaded");
 
 /**
  * Creates a single summary item for the personality profile
@@ -20,9 +21,9 @@ if (typeof window !== 'undefined') {
  */
 export function generatePersonality() {
   try {
-    console.log("🧠 Generating personality profile");
+    log("🧠 Generating personality profile");
     const profileData = collectFormData();
-    console.log("📊 Collected form data:", profileData);
+    log("📊 Collected form data:", profileData);
     generateSummary(profileData);
     generateDescription(profileData);
     
@@ -33,9 +34,9 @@ export function generatePersonality() {
     if (formCard) formCard.style.display = 'none';
     if (outputCard) outputCard.classList.add('visible');
     
-    console.log("✅ Personality profile generated successfully");
+    log("✅ Personality profile generated successfully");
   } catch (error) {
-    console.error("❌ Error generating personality profile:", error);
+    logError("❌ Error generating personality profile:", error);
   }
 }
 
