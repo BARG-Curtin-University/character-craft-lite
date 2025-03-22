@@ -1,6 +1,6 @@
 {
-  "name": "PersonaMate",
-  "short_name": "PersonaMate",
+  "name": "CharacterCraft",
+  "short_name": "CharacterCraft",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
@@ -9,16 +9,14 @@
   "description": "Design the soul behind the chatbot.",
   "icons": [
     {
-      "src": "./icons/icon-192.png",
+      "src": "icon-192.png",
       "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any maskable"
+      "type": "image/png"
     },
     {
-      "src": "./icons/icon-512.png",
+      "src": "icon-512.png",
       "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any maskable"
+      "type": "image/png"
     }
   ]
 }

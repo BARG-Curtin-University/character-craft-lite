@@ -83,14 +83,21 @@ h1 {
   justify-content: center;
 }
 
-/* Persona/Mate branding */
-.persona {
-  color: #4a6fa5; /* Primary blue tone */
+.brand-part1 {
+  color: #4a90e2;
+  font-weight: bold;
 }
 
-.mate {
-  color: #e94e77; /* Contrasting pink/red tone */
+.brand-part2 {
+  color: #f39c12;
+  font-weight: bold;
 }
+
+.brand-part1, .brand-part2 {
+  font-family: 'Segoe UI', sans-serif;
+  letter-spacing: 0.5px;
+}
+
 
 /* Random button styling */
 .btn-random {

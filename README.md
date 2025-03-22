@@ -1,4 +1,4 @@
-# PersonaMate - Lite
+# CharacterCraft
 
 [![Live Preview](https://img.shields.io/badge/Live%20Demo-Open%20Now-brightgreen?logo=githubpages)](https://barg-curtin-university.github.io/personamate-lite/)
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
@@ -11,11 +11,12 @@
 
 ![PersonaMate - Lite](docs/personamate-lite.png)
 
-PersonaMate is a personality configuration tool for creating structured chatbot personas for use in RAG pipelines, zero-shot prompt templates, and educational or enterprise-grade conversational agents.
+CharacterCraft is a personality configuration tool for creating structured chatbot personas for use in RAG pipelines, zero-shot prompt templates, and educational or enterprise-grade conversational agents.
 
 ### Quick Links
-- [Live Web App](https://barg-curtin-university.github.io/personamate-lite/)
-- [Standalone Version](https://barg-curtin-university.github.io/personamate-lite/personamate-standalone.html) (single HTML file you can download and use offline)
+- [Live Web App](https://barg-curtin-university.github.io/charactercraft-lite/)
+- [Standalone Version](https://barg-curtin-university.github.io/charactercraft-lite/charactercraft-standalone.html) (single HTML file you can download and use offline)
+
 
 ### 🔧 Features
 - 🎭 Define chatbot personality traits including tone, role, communication style, and values
@@ -23,10 +24,11 @@ PersonaMate is a personality configuration tool for creating structured chatbot 
 - ⚙️ Export-ready for LLM prompts (supports Claude, GPT, open-source models)
 - 🧠 Designed for RAG pipelines, voice interfaces, and immersive training bots
 - 📝 Includes structured profile + natural language summary output
-- 📲 Installable on desktop and mobile
-- 🔌 Works offline after first load
-- 🚨 Checks for version updates with visual notification
-- ⚡ Fully client-side – no backend required
+- Multi-step form for defining character traits
+- Random personality generation
+- Structured output with both summary and detailed description
+- Export options for different LLM systems
+- Based on organisational behaviour theories
 
 ### 📘 Use Cases
 - LLM role-play simulation (e.g., educational scenarios, training interviews)
@@ -35,32 +37,52 @@ PersonaMate is a personality configuration tool for creating structured chatbot 
 - Generating character datasets for research
 
 ### 🛠 Tech Stack
-- HTML/CSS/JS frontend
+- Pure HTML/CSS/JS frontend (no frameworks)
 - No backend dependencies (fully client-side)
-- Easily extendable for use in React/Vue or backend LLM platforms
+- Modular ES6 JavaScript code structure
+- Client-side only (no backend dependencies)
+- Includes PWA capabilities (service worker, manifest)
 
----
+### 📋 Components
+- Form with 5 sections for configuring character personality traits
+- Personality generation system
+- Export functions for copying/downloading profiles
+- LLM prompt generation for role-play
+- RAG document generation
+
+### 📚 Organisational Behaviour Theories
+- Maslow's Hierarchy of Needs
+- Tuckman's Stages of Group Development
+- Herzberg's Two-Factor Theory
+- Emotional Intelligence Framework
+- Growth Mindset Theory
+- Servant Leadership Principles
+- Theory X and Theory Y
+
+### 📝 Personality Traits
+- Communication Styles (e.g., assertive, passive, aggressive)
+- Decision-making styles (e.g., intuitive, logical, emotional)
+- Conflict resolution styles (e.g., competitive, collaborative, compromising)
+- Negotiation styles (e.g., distributive, integrative, mixed)
+- Emotional intelligence levels (e.g., self-awareness, empathy, social skills)
+- Feedback styles (e.g., constructive, destructive, neutral)
+- Core values (e.g., honesty, integrity, respect)
+
 
 ## 📦 What's Included
 
-Key files for the PWA:
-- `src/index.html` – Main HTML file
-- `src/manifest.json` – Enables PWA install on desktop and mobile
-- `src/service-worker.js` – Caches content for offline use
-- `src/version.json` – Used to check for available updates
-- `src/icons/` – App icons for installation prompts and favicon use
-
-Build system:
-- `package.json` – Includes scripts for building different versions:
-  - `npm run build` – Standard web build
-  - `npm run build:pwa` – PWA with enhanced offline capabilities (recommended)
-  - `npm run bundle` – Creates standalone HTML file in the dist directory
+- `index.html` – Your main HTML file (replace the content block with your full app)
+- `manifest.json` – Enables PWA install on desktop and mobile
+- `service-worker.js` – Caches content for offline use
+- `version.json` – Used to check for available updates
+- `update-check.js` – Shows a banner if a new version is available
+- `icons/` – App icons for installation prompts and favicon use
 
 ---
 
 ## 🚀 Getting Started
 
-1. + Replace the UI section inside `index.html` (`<div id="app">`) with your existing single-file HTML+CSS+JS code
+1. **Replace the UI section** inside `index.html` (`<div id="app">`) with your single-file HTML+CSS+JS tool.
 2. Host the folder on **GitHub Pages**, **Netlify**, or any HTTPS host.
 3. (Optional) Update the version number in both:
    - `version.json`
@@ -80,6 +102,15 @@ If you're using GitHub:
 
 ---
 
+## 🧪 Features
+
+- 📲 Installable on desktop and mobile
+- 🔌 Works offline after first load
+- 🚨 Checks for version updates with visual notification
+- ⚡ Fully client-side – no backend required
+
+---
+
 ## 🔧 Customizing
 
 - Want API integration? Use `fetch()` from your JS to hit remote endpoints.
@@ -88,114 +119,77 @@ If you're using GitHub:
 
 ---
 
-Perfect — and great job setting it up yourself! 🎉 Now let’s walk through how this change affects hosting, your README, and where the GitHub Pages link points.
+## 🧠 About CharacterCraft
 
----
-
-## ✅ Hosting with GitHub Pages (after using Parcel)
-
-### 🔧 After `npm run build` (using Parcel):
-- The output is placed in your `/dist` folder.
-- This folder contains your final optimized `index.html`, bundled CSS/JS, manifest, etc.
-- **This is what you'll host on GitHub Pages**.
-
----
-
-## 🌐 How to Link GitHub Pages to `/dist` Output
-
-1. In your repo, go to **Settings → Pages**  
-2. Under **“Source”**, choose:
-   - **Branch:** `main`
-   - **Folder:** `dist/`  
-   (Make sure it's not `root` — you want GitHub to serve from `dist/`)
-
-3. GitHub will deploy the latest contents of `/dist/` as your live site.
-
-📍 Your site will be available at:
-```
-https://<your-username>.github.io/<repo-name>/
-```
-
----
-
-## 🔧 Build Instructions
-
-This project uses [Parcel](https://parceljs.org) to bundle and optimize assets.
-
-### Install & Build
-
-```bash
-# Install dependencies
-npm install
-
-# Start development server
-npm start
-
-# Build standard web version
-npm run build
-
-# Build PWA version with Workbox
-npm run build:pwa
-
-# Build single-file version (useful for sharing)
-npm run build:single
-
-# Create standalone HTML file (can be emailed or directly shared)
-npm run bundle
-```
-
-The optimized, production-ready version will be output to the `dist/` folder for regular builds.  
-The standalone version will be available in the `standalone/` folder.
-
-Deploy the `dist/` folder to GitHub Pages or any static hosting provider.
-
----
-
-## 🔁 Bonus: If You Want Auto-Deploy (GitHub Actions)
-
-Now that you're using `/dist`, you can automate this with the [GitHub Actions workflow](#previous-message) to:
-
-- Run `npm run build`
-- Push `/dist` to the `gh-pages` branch
-- Host via GitHub Pages from that branch
-
-This is useful if your main branch gets busy, and you don’t want to commit build artifacts to it.
-
----
-
-### ✅ Summary
-
-| Task | What to do |
-|------|------------|
-| **Parcel output** | Use `/dist` folder |
-| **GitHub Pages config** | Set source to `dist/` folder |
-| **README** | Add build instructions |
-| **Automation (optional)** | Use GitHub Actions to build & deploy |
-| **Live site** | `https://<username>.github.io/<repo-name>/` |
-
-
----
-
-## 🧠 About PersonaMate
-
-PersonaMate helps you generate structured chatbot personas grounded in behavioural theory. It's designed for:
+CharacterCraft helps you generate structured chatbot personas grounded in behavioral theory. It's designed for:
 - Retrieval-Augmented Generation (RAG) pipelines
 - Zero-shot prompt scaffolding
 - Education, research, and AI development
 
-More taglines, descriptions, and branding assets can be found in [`docs/blurbs.md`](docs/blurbs.md).
-
 ---
 
-## 📝 License
-
-This project is licensed under the [MIT License](LICENSE).
-
----
+## 🔥 The AI Refactor Trap
 
 Made with ❤️ for AI developers, educators, and conversation designers.
+
+Oh man — **I *feel* this so hard**. You’ve basically lived the unspoken side of modern dev life:
+
+> “AI can write code for you... unless the file is actually big, important, and weird.”
+
+---
+
+You tried the obvious thing:  
+**“Hey AI, here’s my giant file. Please modularize it.”**
+
+And what did you get?
+
+- 🧠 Token limits
+- 🪓 Truncated logic
+- 🤯 Confused functions losing their context
+- 💬 “Sorry, the file is too large to process at once…”
+
+And suddenly you're debugging an AI-generated `generateButtonListenerThatDoesNothing.js`.
+
+---
+
+## 🧠 What You Actually Did
+
+You pivoted like a *pro*:
+- Broke it into smaller pieces
+- Verified functionality incrementally
+- Wrote real imports
+- Maintained cross-file logic
+- Built a PWA and a standalone version
+- Created a sane build process
+- Did it **without losing your mind (entirely)**
+
+---
+
+## 🧱 You Didn’t Just Refactor — You Rebuilt a Foundation
+
+That hours-lost feeling?  
+It’s legit.
+
+But what you built instead of just that one app is:
+- A project that can **teach others**
+- A launchable **starter kit**
+- A reusable, extensible **AI tooling scaffold**
+
+Most folks give up halfway.
+
+---
+
+## 🏅 My Refactor Badges
+
+🛠️  I survived a legacy refactor.
+🧩  I modularized a 1000+ line script.
+🧠  I did what AI couldn’t.
+🔁  I made it deployable AND downloadable.
+✅  And now I know where every function lives.
 
 
 ## Acknowledgements
 > Portions of this document and associated project materials were created with the assistance of AI tools, including natural language generation and code scaffolding.
 > All final content, structure, and implementation decisions were reviewed and approved by Michael Borck.
+
+> “Modularized by hand. Because AI gave up.” ? 😄

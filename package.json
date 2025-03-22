@@ -1,5 +1,5 @@
 {
-  "name": "personamate-lite",
+  "name": "charactercraft-lite",
   "version": "1.0.0",
   "description": "Generate structured chatbot personalities for educational, enterprise, and conversational agents",
   "source": "src/index.html",
