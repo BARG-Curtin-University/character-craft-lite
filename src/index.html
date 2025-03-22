@@ -304,5 +304,21 @@
 </div>
 <!-- Import JS files from the js folder in the correct order -->
 <script src="js/index.js" type="module"></script>
+<!-- Fallback for bundled builds -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    console.log("Fallback script running");
+    
+    // Add a slight delay to ensure module script has had a chance to run
+    setTimeout(function() {
+      if (window.initializePersonaMate) {
+        console.log("Running initialization from fallback script");
+        window.initializePersonaMate();
+      } else {
+        console.warn("initializePersonaMate not available in fallback script");
+      }
+    }, 1000);
+  });
+</script>
 </body>
 </html>
