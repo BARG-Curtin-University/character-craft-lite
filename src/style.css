@@ -10,7 +10,7 @@
 :root {
   --primary-color: #4a6fa5;
   --secondary-color: #6b96c9;
-  --accent-color: #ff7e5f;
+  --accent-color: #f39c12;
   --light-bg: #f7f9fc;
   --dark-text: #2d3748;
   --light-text: #718096;
@@ -45,10 +45,24 @@ body {
   margin: 0 auto;
 }
 
-.main-content {
+.form-card {
+  text-align: center;
+}
+
+
+/*.main-content {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 2rem;
+}*/
+.main-content {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* or center for full vertical center */
+  min-height: 60vh;
+  padding: 2rem 0;
+  gap: 2rem;
+  flex-wrap: wrap;
 }
 
 @media (max-width: 768px) {

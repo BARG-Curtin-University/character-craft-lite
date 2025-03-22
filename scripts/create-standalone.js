@@ -132,8 +132,8 @@ $('head').append(`
     {
       "version": "1.0.0",
       "releaseDate": "2024-03-22",
-      "updateUrl": "https://barg-curtin-university.github.io/personamate-lite/",
-      "notes": "Initial release of PersonaMate Lite"
+      "updateUrl": "https://barg-curtin-university.github.io/charactercraft-lite/",
+      "notes": "Initial release of CharacterCraft Lite"
     }
   </script>
 `);
@@ -145,7 +145,7 @@ $('head').append(`
     // even if module bundling fails
     
     // Global helper functions for the standalone version
-    window.PersonaMateHelpers = {
+    window.CharacterCraftHelpers = {
       // Random option selection
       getRandomOptionExcluding: function(selectId, excludeValues) {
         console.log("Using global helper: getRandomOptionExcluding");
@@ -234,23 +234,23 @@ $('body').append(`
       
       // Ensure core functions are available globally
       if (typeof window.generateRandomOptionExcluding !== 'function') {
-        window.generateRandomOptionExcluding = window.PersonaMateHelpers.getRandomOptionExcluding;
+        window.generateRandomOptionExcluding = window.CharacterCraftHelpers.getRandomOptionExcluding;
       }
       
       if (typeof window.generateRandomMultiSelect !== 'function') {
-        window.generateRandomMultiSelect = window.PersonaMateHelpers.generateRandomMultiSelect;
+        window.generateRandomMultiSelect = window.CharacterCraftHelpers.generateRandomMultiSelect;
       }
       
       if (typeof window.updateChipSelectionUI !== 'function') {
-        window.updateChipSelectionUI = window.PersonaMateHelpers.updateChipSelectionUI;
+        window.updateChipSelectionUI = window.CharacterCraftHelpers.updateChipSelectionUI;
       }
       
       // Make sure initialization happens even if module loading fails
       setTimeout(function() {
-        if (window.initializePersonaMate && !window.isPersonaMateInitialized) {
+        if (window.initializeCharacterCraft && !window.isCharacterCraftInitialized) {
           console.log("Running initialization from standalone script");
-          window.initializePersonaMate();
-        } else if (window.isPersonaMateInitialized) {
+          window.initializeCharacterCraft();
+        } else if (window.isCharacterCraftInitialized) {
           console.log("Already initialized, skipping standalone initialization");
         } else {
           console.warn("Standalone fallback: creating basic button handlers");
@@ -285,6 +285,6 @@ $('body').append(`
 
 // Create a standalone HTML file
 const standaloneHtml = $.html();
-fs.writeFileSync(path.join(distDir, 'personamate-standalone.html'), standaloneHtml);
+fs.writeFileSync(path.join(distDir, 'charactercraft-standalone.html'), standaloneHtml);
 
-console.log('Created standalone HTML file: dist/personamate-standalone.html');
+console.log('Created standalone HTML file: dist/charactercraft-standalone.html');
