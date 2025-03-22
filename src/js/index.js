@@ -27,6 +27,12 @@ import { copyToClipboard, downloadProfile, resetForm } from './export.js';
 import { generateLLMPrompt } from './data/prompts.js';
 import { generateRAGDocument } from './data/rag.js';
 import { checkForUpdates } from '../update-check.js';
+import { setupChipSelectors } from './inputs.js';
+
+document.addEventListener('DOMContentLoaded', () => {
+  setupChipSelectors();
+});
+
 
 // Make sure the event listeners work regardless of how the app is loaded
 function initializeEventListeners() {

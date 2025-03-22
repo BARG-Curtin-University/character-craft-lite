@@ -246,6 +246,8 @@ select[multiple] {
   margin-top: 0.5rem;
 }
 
+
+
 .chip {
   display: inline-block;
   padding: 0.5rem 1rem;
@@ -257,8 +259,10 @@ select[multiple] {
 }
 
 .chip.selected {
-  background-color: var(--secondary-color);
+  background-color: var(--accent-color, #f39c12);
   color: white;
+  font-weight: 600;
+  border-color: transparent;
 }
 
 /* Custom input handling */
