@@ -33,9 +33,17 @@ function inlineResources() {
       const jsPath = path.join(distDir, src);
       if (fs.existsSync(jsPath)) {
         const js = fs.readFileSync(jsPath, 'utf8');
-        // Replace import.meta.url with window.location.href
-        const fixedJs = js.replace(/import\.meta\.url/g, 
+        // First, replace direct references to import.meta.url
+        let fixedJs = js.replace(/import\.meta\.url/g, 
           "window.location.href /* STANDALONE: replaced import.meta.url */");
+        
+        // Then, look for code that checks if import.meta exists and replace the entire block
+        fixedJs = fixedJs.replace(/typeof\s+import\s*!==\s*['"]undefined['"]\s*&&\s*import\.meta/g,
+          "false /* STANDALONE: disabled import.meta check */");
+        
+        // Also handle any other potential import.meta references
+        fixedJs = fixedJs.replace(/import\.meta/g,
+          "/* STANDALONE: import.meta not available */ ({})");
         // Keep the script as a module if it was a module
         const scriptType = $(el).attr('type') || '';
         if (scriptType === 'module') {
