@@ -90,15 +90,16 @@ h1 {
   margin-top: 1rem;
   display: flex;
   justify-content: center;
+  gap: 1rem;
 }
 
 .brand-part1 {
-  color: --primary-color;
+  color: var(--primary-color);
   font-weight: bold;
 }
 
 .brand-part2 {
-  color: --accent-color;
+  color: var(--accent-color);
   font-weight: bold;
 }
 
@@ -380,7 +381,7 @@ button {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  background-color: --primary-color;
+  background-color: var(--primary-color);
   border: 1px solid #cbd5e0;
   color: var(--dark-text);
 }
@@ -390,7 +391,7 @@ button {
 .btn-generate-prompt:hover,
 .btn-generate-rag:hover,
 .btn-reset:hover {
-  background-color: var(--light-bg);
+  background-color: var(--secondary-color);
 }
 
 /* 
@@ -423,22 +424,6 @@ button {
 button:focus {
   outline: 3px solid var(--secondary-color);
   outline-offset: 2px;
-}
-
-/* Slightly enhanced light background for subtle buttons */
-.btn-copy,
-.btn-reset,
-.btn-generate-prompt,
-.btn-generate-rag {
-  background-color: #f1f5f9;
-}
-
-/* Improve hover background feedback */
-.btn-copy:hover,
-.btn-reset:hover,
-.btn-generate-prompt:hover,
-.btn-generate-rag:hover {
-  background-color: #edf2f7;
 }
 
 /* Animate card entrance */
