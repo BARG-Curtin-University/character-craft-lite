@@ -42,11 +42,28 @@ export function checkForUpdates(currentVersion) {
   if (!navigator.onLine) return;
   if (localStorage.getItem('updateDismissed') === 'true') return;
 
-  // Try multiple paths to find version.json
+  // Try multiple paths to find version.json with better fallbacks
   fetch('./version.json')
     .catch(() => {
       console.log('Trying alternate version.json path');
       return fetch('version.json');
+    })
+    .catch(() => {
+      console.log('Trying absolute path to version.json');
+      return fetch('/personamate-lite/version.json');
+    })
+    .catch(() => {
+      // Last resort - create a mock response with default version data
+      console.log('Creating mock version response');
+      return new Response(JSON.stringify({
+        version: '1.0.0',
+        releaseDate: '2024-03-22',
+        updateUrl: 'https://barg-curtin-university.github.io/personamate-lite/',
+        notes: 'Initial release of PersonaMate Lite'
+      }), {
+        status: 200,
+        headers: { 'Content-Type': 'application/json' }
+      });
     })
     .then(response => {
       if (!response.ok) throw new Error('Version check failed');

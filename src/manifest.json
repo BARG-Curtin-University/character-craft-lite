@@ -1,21 +1,24 @@
 {
   "name": "PersonaMate",
   "short_name": "PersonaMate",
-  "start_url": "./",
+  "start_url": "/personamate-lite/",
+  "scope": "/personamate-lite/",
   "display": "standalone",
   "background_color": "#f5f7fa",
   "theme_color": "#4a6fa5",
   "description": "Design the soul behind the chatbot.",
   "icons": [
     {
-      "src": "icons/icon-192.png",
+      "src": "/personamate-lite/icon-192.9c812f35.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
-      "src": "icons/icon-512.png",
+      "src": "/personamate-lite/icon-512.eb7085cf.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ]
 }

@@ -94,12 +94,38 @@ function inlineResources() {
 // Inline all resources
 inlineResources();
 
+// Add embedded version.json data directly in the HTML
+$('head').append(`
+  <script type="application/json" id="embedded-version-data">
+    {
+      "version": "1.0.0",
+      "releaseDate": "2024-03-22",
+      "updateUrl": "https://barg-curtin-university.github.io/personamate-lite/",
+      "notes": "Initial release of PersonaMate Lite"
+    }
+  </script>
+`);
+
 // Add a special standalone initialization script
 $('body').append(`
   <script>
     // Special initialization for standalone version
     document.addEventListener('DOMContentLoaded', function() {
       console.log("Standalone initialization starting");
+      
+      // Override the fetch function for version.json to use embedded data
+      const originalFetch = window.fetch;
+      window.fetch = function(url, options) {
+        if (typeof url === 'string' && url.includes('version.json')) {
+          console.log("Using embedded version data instead of fetch for: " + url);
+          const versionData = document.getElementById('embedded-version-data').textContent;
+          return Promise.resolve(new Response(versionData, {
+            status: 200,
+            headers: { 'Content-Type': 'application/json' }
+          }));
+        }
+        return originalFetch(url, options);
+      };
       
       // Make sure initialization happens even if module loading fails
       setTimeout(function() {
