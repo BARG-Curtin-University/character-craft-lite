@@ -154,3 +154,12 @@ export function createCopyButton(buttonText, textToCopy) {
   
   return button;
 }
+
+// Make modal functions globally available for standalone version
+if (typeof window !== 'undefined') {
+  window.showModal = showModal;
+  window.createModalOverlay = createModalOverlay;
+  window.createModalContent = createModalContent;
+  window.createCloseButton = createCloseButton;
+  window.createCopyButton = createCopyButton;
+}
