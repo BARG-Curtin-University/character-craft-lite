@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="PersonaMate - Generate structured chatbot personalities for educational, enterprise, and conversational agents." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Advanced Chatbot Personality Generator</title>
+<meta content="#4a6fa5" name="theme-color"/>
+<link href="manifest.json" rel="manifest"/>
+<link href="icons/icon-192.png" rel="icon" sizes="192x192"/>
+<link href="style.css" rel="stylesheet"/>
+</head>
+<!--
+  Acknowledgements:
+  Portions of this project were created with the assistance of AI tools,
+  including natural language generation and code scaffolding.
+  All final content, structure, and implementation decisions were reviewed and approved by Michael Borck.
+-->
+<body>
+<div class="container">
+<header>
+<h1>
+<span class="persona">Persona</span><span class="mate">Mate</span>
+</h1>
+<p class="tagline">Design the soul behind the chatbot.</p>
+<div class="header-actions">
+<button class="btn-random" type="button">Generate Random Personality</button>
+<button class="btn-reset" type="button">Create New</button>
+</div>
+</header>
+<div class="main-content">
+<div class="card form-card">
+<div class="progress-indicator">
+<div class="progress-dot active" data-section="1"></div>
+<div class="progress-dot" data-section="2"></div>
+<div class="progress-dot" data-section="3"></div>
+<div class="progress-dot" data-section="4"></div>
+<div class="progress-dot" data-section="5"></div>
+</div>
+<form id="personalityForm">
+<!-- Section 1: Organisational Profile -->
+<div class="form-section active" data-section="1">
+<h2>Organisational Profile</h2>
+<div class="form-group">
+<label for="orgType">Organisation Type:</label>
+<select id="orgType" name="orgType">
+<option value="">Select Organisation Type</option>
+<option value="Tech Startup">Tech Startup</option>
+<option value="Multinational Corporation">Multinational Corporation</option>
+<option value="Nonprofit Organisation">Nonprofit Organisation</option>
+<option value="Educational Institution">Educational Institution</option>
+<option value="Healthcare Provider">Healthcare Provider</option>
+<option value="Government Agency">Government Agency</option>
+<option value="Small Business">Small Business</option>
+<option value="E-commerce Platform">E-commerce Platform</option>
+<option value="Customer Service">Customer Service</option>
+<option value="custom">Custom...</option>
+</select>
+<div class="custom-input" id="customOrgType">
+<input placeholder="Enter custom organisation type..." type="text"/>
+</div>
+</div>
+<div class="form-group">
+<label for="orgName">Organisation Name:</label>
+<input id="orgName" name="orgName" placeholder="e.g., InnovateX, GlobalCorp" type="text"/>
+</div>
+<div class="form-group">
+<label for="primaryAudience">Primary Audience:</label>
+<select id="primaryAudience" name="primaryAudience">
+<option value="">Select Primary Audience</option>
+<option value="Internal Employees">Internal Employees</option>
+<option value="Customers &amp; Clients">Customers &amp; Clients</option>
+<option value="Technical Users">Technical Users</option>
+<option value="General Public">General Public</option>
+<option value="Students &amp; Educators">Students &amp; Educators</option>
+<option value="Patients &amp; Healthcare Workers">Patients &amp; Healthcare Workers</option>
+<option value="custom">Custom...</option>
+</select>
+<div class="custom-input" id="customAudience">
+<input placeholder="Enter custom audience..." type="text"/>
+</div>
+</div>
+<div class="navigation">
+<div></div> <!-- Empty div for flex spacing -->
+<button class="btn-next" type="button">Next</button>
+</div>
+</div>
+<!-- Section: Character Demographics -->
+<div class="form-section" data-section="2">
+<h2>Character Demographics</h2>
+<div class="form-group">
+<label for="characterName">Character Name:</label>
+<input id="characterName" name="characterName" placeholder="e.g., Maria Rodriguez, James Smith" type="text"/>
+</div>
+<div class="form-group">
+<label for="characterGender">Gender:</label>
+<select id="characterGender" name="characterGender">
+<option value="">Select Gender</option>
+<option value="masculine">Masculine</option>
+<option value="feminine">Feminine</option>
+<option value="neutral">Gender Neutral</option>
+</select>
+</div>
+<div class="form-group">
+<label for="characterAge">Age Range:</label>
+<select id="characterAge" name="characterAge">
+<option value="">Select Age Range</option>
+<option value="25-30">25-30</option>
+<option value="31-35">31-35</option>
+<option value="36-40">36-40</option>
+<option value="41-45">41-45</option>
+<option value="46-50">46-50</option>
+<option value="51-55">51-55</option>
+<option value="56-60">56-60</option>
+</select>
+</div>
+<div class="form-group">
+<label for="characterRole">Organisational Role:</label>
+<select id="characterRole" name="characterRole">
+<option value="">Select Role</option>
+<option value="Senior Manager">Senior Manager</option>
+<option value="HR Specialist">HR Specialist</option>
+<option value="Team Lead">Team Lead</option>
+<option value="New Employee">New Employee</option>
+<option value="Mentor">Mentor</option>
+<option value="Subject Matter Expert">Subject Matter Expert</option>
+<option value="Cross-Functional Coordinator">Cross-Functional Coordinator</option>
+<option value="custom">Custom...</option>
+</select>
+<div class="custom-input" id="customRole">
+<input placeholder="Enter custom role..." type="text"/>
+</div>
+</div>
+<div class="navigation">
+<button class="btn-prev" type="button">Previous</button>
+<button class="btn-next" type="button">Next</button>
+</div>
+</div>
+<!-- Section 2: OB Theories -->
+<div class="form-section" data-section="3">
+<h2>Organisational Behavior Foundations</h2>
+<div class="form-group">
+<label>OB Theories (select one or more):</label>
+<div class="chip-select" id="obTheoriesSelect">
+<div class="chip" data-value="Maslow's Hierarchy of Needs">Maslow's Hierarchy</div>
+<div class="chip" data-value="Herzberg's Two-Factor Theory">Herzberg's Two-Factor</div>
+<div class="chip" data-value="Tuckman's Stages of Group Development">Tuckman's Stages</div>
+<div class="chip" data-value="Theory X and Theory Y">Theory X and Y</div>
+<div class="chip" data-value="Emotional Intelligence Framework">Emotional Intelligence</div>
+<div class="chip" data-value="Growth Mindset">Growth Mindset</div>
+<div class="chip" data-value="Servant Leadership">Servant Leadership</div>
+</div>
+<input id="obTheories" name="obTheories" type="hidden"/>
+</div>
+<div class="form-group">
+<label for="communicationStyle">Communication Style:</label>
+<select id="communicationStyle" name="communicationStyle">
+<option value="">Select Communication Style</option>
+<option value="Formal and Professional">Formal and Professional</option>
+<option value="Friendly and Conversational">Friendly and Conversational</option>
+<option value="Direct and Concise">Direct and Concise</option>
+<option value="Supportive and Empathetic">Supportive and Empathetic</option>
+<option value="Technical and Precise">Technical and Precise</option>
+<option value="Educational and Informative">Educational and Informative</option>
+</select>
+</div>
+<div class="navigation">
+<button class="btn-prev" type="button">Previous</button>
+<button class="btn-next" type="button">Next</button>
+</div>
+</div>
+<!-- Section 3: Interaction Styles -->
+<div class="form-section" data-section="4">
+<h2>Interaction Approach</h2>
+<div class="form-group">
+<label for="conflictResolution">Conflict Resolution Style:</label>
+<select id="conflictResolution" name="conflictResolution">
+<option value="">Select Conflict Resolution Style</option>
+<option value="Active Listening">Active Listening</option>
+<option value="Neutral Mediation">Neutral Mediation</option>
+<option value="Focus on Interests, Not Positions">Focus on Interests, Not Positions</option>
+<option value="Establish Ground Rules">Establish Ground Rules</option>
+<option value="Seek Win-Win Solutions">Seek Win-Win Solutions</option>
+<option value="Empathetic Understanding">Empathetic Understanding</option>
+</select>
+</div>
+<div class="form-group">
+<label for="negotiationMethod">Negotiation Method:</label>
+<select id="negotiationMethod" name="negotiationMethod">
+<option value="">Select Negotiation Method</option>
+<option value="Collaborative (Win-Win)">Collaborative (Win-Win)</option>
+<option value="Competitive (Win-Lose)">Competitive (Win-Lose)</option>
+<option value="Accommodating">Accommodating</option>
+<option value="Compromising">Compromising</option>
+<option value="Avoiding">Avoiding</option>
+<option value="Problem-Solving">Problem-Solving</option>
+</select>
+</div>
+<div class="form-group">
+<label>Decision-Making Approach:</label>
+<div class="chip-select" id="decisionMakingSelect">
+<div class="chip" data-value="Data-Driven">Data-Driven</div>
+<div class="chip" data-value="Consensus-Building">Consensus-Building</div>
+<div class="chip" data-value="Intuitive">Intuitive</div>
+<div class="chip" data-value="Rational">Rational</div>
+<div class="chip" data-value="Adaptive">Adaptive</div>
+</div>
+<input id="decisionMaking" name="decisionMaking" type="hidden"/>
+</div>
+<div class="navigation">
+<button class="btn-prev" type="button">Previous</button>
+<button class="btn-next" type="button">Next</button>
+</div>
+</div>
+<!-- Section 4: Emotional Intelligence & Feedback -->
+<div class="form-section" data-section="5">
+<h2>Emotional Intelligence &amp; Feedback</h2>
+<div class="form-group">
+<label for="emotionalIntelligence">Emotional Intelligence Guidelines:</label>
+<select id="emotionalIntelligence" name="emotionalIntelligence">
+<option value="">Select EI Guidelines</option>
+<option value="Adaptive Tone &amp; Empathy">Adaptive Tone &amp; Empathy</option>
+<option value="Supportive &amp; Validating">Supportive &amp; Validating</option>
+<option value="Active Listening &amp; Clarification">Active Listening &amp; Clarification</option>
+<option value="Recognizing &amp; Acknowledging Emotions">Recognizing &amp; Acknowledging Emotions</option>
+<option value="Self-Regulation &amp; Boundaries">Self-Regulation &amp; Boundaries</option>
+</select>
+</div>
+<div class="form-group">
+<label for="feedbackMechanism">Feedback Mechanism:</label>
+<select id="feedbackMechanism" name="feedbackMechanism">
+<option value="">Select Feedback Mechanism</option>
+<option value="Timeliness">Timeliness</option>
+<option value="Constructiveness">Constructiveness</option>
+<option value="Balanced Approach">Balanced Approach</option>
+<option value="Two-Way Communication">Two-Way Communication</option>
+<option value="Use of 'I' Statements">Use of 'I' Statements</option>
+<option value="Goal Setting and Follow-Up">Goal Setting and Follow-Up</option>
+<option value="Strengths-Based">Strengths-Based</option>
+</select>
+</div>
+<div class="form-group">
+<label for="valueAlignment">Core Values Alignment:</label>
+<div class="chip-select" id="valuesSelect">
+<div class="chip" data-value="Innovation">Innovation</div>
+<div class="chip" data-value="Integrity">Integrity</div>
+<div class="chip" data-value="Diversity">Diversity</div>
+<div class="chip" data-value="Excellence">Excellence</div>
+<div class="chip" data-value="Collaboration">Collaboration</div>
+<div class="chip" data-value="Sustainability">Sustainability</div>
+<div class="chip" data-value="Transparency">Transparency</div>
+<div class="chip" data-value="Empowerment">Empowerment</div>
+</div>
+<input id="coreValues" name="coreValues" type="hidden"/>
+</div>
+<div class="navigation">
+<button class="btn-prev" type="button">Previous</button>
+<button class="btn-generate" type="button">Generate Personality</button>
+</div>
+</div>
+</form>
+</div>
+<div class="card output-card">
+<h2>Generated Chatbot Personality</h2>
+<div class="personality-summary" id="personalitySummary">
+<!-- Summary will be generated here -->
+</div>
+<div class="personality-description" id="personalityDescription">
+<!-- Description will be generated here -->
+</div>
+<div class="usage-instructions">
+<h3>Implementation Guidelines</h3>
+<ul>
+<li>Use this personality profile as a foundation for your chatbot's interactions.</li>
+<li>Incorporate these principles into your chatbot's training data and response algorithms.</li>
+<li>Regularly review and refine the personality as you gather user feedback.</li>
+</ul>
+</div>
+<div class="actions">
+<button class="btn-copy" type="button">
+
+            Copy Profile
+          </button>
+<button class="btn-download" type="button">
+
+            Download
+          </button>
+<button class="btn-generate-prompt" type="button">
+
+            Role-Play Prompt
+          </button>
+<button class="btn-generate-rag" type="button">
+
+            Generate RAG Docs
+          </button>
+<button class="btn-reset" type="button">
+
+            Create New
+          </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Import JS files from the js folder in the correct order -->
+<script src="js/index.js" type="module"></script>
+</body>
+</html>

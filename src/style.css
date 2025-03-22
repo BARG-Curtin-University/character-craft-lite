@@ -1,0 +1,457 @@
+/**
+ * PersonaMate Lite - Main Stylesheet
+ * 
+ * A clean and modern interface for generating chatbot personalities
+ */
+
+/* 
+ * CSS Variables for consistent theming
+ */
+:root {
+  --primary-color: #4a6fa5;
+  --secondary-color: #6b96c9;
+  --accent-color: #ff7e5f;
+  --light-bg: #f7f9fc;
+  --dark-text: #2d3748;
+  --light-text: #718096;
+  --border-radius: 8px;
+  --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --transition: all 0.3s ease;
+}
+
+/* 
+ * Base Styles 
+ */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  color: var(--dark-text);
+  background: linear-gradient(135deg, #f5f7fa 0%, #e4ecfb 100%);
+  min-height: 100vh;
+  padding: 2rem;
+}
+
+/* 
+ * Layout & Container Styles 
+ */
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.main-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* 
+ * Header Styles 
+ */
+header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+h1 {
+  color: var(--primary-color);
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.tagline {
+  color: var(--light-text);
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.header-actions {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+/* Persona/Mate branding */
+.persona {
+  color: #4a6fa5; /* Primary blue tone */
+}
+
+.mate {
+  color: #e94e77; /* Contrasting pink/red tone */
+}
+
+/* Random button styling */
+.btn-random {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--accent-color);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-random:hover {
+  background-color: #ff9a80;
+  transform: translateY(-2px);
+}
+
+/* 
+ * Card Styling 
+ */
+.card {
+  background: white;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  padding: 2rem;
+  transition: var(--transition);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+/* Card headings */
+h2 {
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+/* 
+ * Form Styling 
+ */
+.form-card {
+  position: relative;
+}
+
+/* Progress indicator */
+.progress-indicator {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.progress-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #e2e8f0;
+  transition: var(--transition);
+}
+
+.progress-dot.active {
+  background-color: var(--accent-color);
+}
+
+/* Form sections and transitions */
+.form-section {
+  display: none;
+  animation: fadeIn 0.5s ease;
+}
+
+.form-section.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Form input styling */
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: var(--dark-text);
+}
+
+select,
+input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #cbd5e0;
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  color: var(--dark-text);
+  background-color: white;
+  transition: var(--transition);
+}
+
+select:focus,
+input:focus {
+  outline: none;
+  border-color: var(--secondary-color);
+  box-shadow: 0 0 0 3px rgba(107, 150, 201, 0.2);
+}
+
+select[multiple] {
+  height: auto;
+  min-height: 120px;
+}
+
+/* Chip select component */
+.chip-select {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.chip {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background-color: #e2e8f0;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: var(--transition);
+  font-size: 0.9rem;
+}
+
+.chip.selected {
+  background-color: var(--secondary-color);
+  color: white;
+}
+
+/* Custom input handling */
+.custom-input {
+  display: none;
+  margin-top: 1rem;
+}
+
+.custom-input.visible {
+  display: block;
+}
+
+/* Form navigation */
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+}
+
+/* 
+ * Button Styling 
+ */
+button {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+/* Navigation buttons */
+.btn-prev {
+  background-color: #e2e8f0;
+  color: var(--dark-text);
+}
+
+.btn-next,
+.btn-generate {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.btn-prev:hover {
+  background-color: #cbd5e0;
+}
+
+.btn-next:hover,
+.btn-generate:hover {
+  background-color: var(--secondary-color);
+}
+
+/* 
+ * Output Card Styling 
+ */
+.output-card {
+  display: none;
+}
+
+.output-card.visible {
+  display: block;
+}
+
+/* Personality summary section */
+.personality-summary {
+  margin-bottom: 2rem;
+}
+
+.summary-item {
+  display: flex;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 1rem;
+}
+
+.summary-label {
+  font-weight: 600;
+  width: 40%;
+  color: var(--primary-color);
+}
+
+.summary-value {
+  width: 60%;
+}
+
+/* Personality description section */
+.personality-description {
+  background-color: var(--light-bg);
+  padding: 1.5rem;
+  border-radius: var(--border-radius);
+  border-left: 4px solid var(--accent-color);
+}
+
+/* Usage instructions section */
+.usage-instructions {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e2e8f0;
+}
+
+.usage-instructions h3 {
+  color: var(--primary-color);
+  margin-bottom: 0.75rem;
+}
+
+/* Action buttons container */
+.actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+/* Secondary action buttons */
+.btn-copy,
+.btn-download,
+.btn-generate-prompt,
+.btn-generate-rag,
+.btn-reset {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: white;
+  border: 1px solid #cbd5e0;
+  color: var(--dark-text);
+}
+
+.btn-copy:hover,
+.btn-download:hover,
+.btn-generate-prompt:hover,
+.btn-generate-rag:hover,
+.btn-reset:hover {
+  background-color: var(--light-bg);
+}
+
+/* 
+ * Update Banner Styling
+ */
+.update-banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 12px 16px;
+  background-color: var(--primary-color);
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 9999;
+}
+
+.update-banner a {
+  color: white;
+  text-decoration: underline;
+}
+
+
+
+/* --- Accessibility & Visual Tweaks --- */
+
+button:focus {
+  outline: 3px solid var(--secondary-color);
+  outline-offset: 2px;
+}
+
+/* Slightly enhanced light background for subtle buttons */
+.btn-copy,
+.btn-reset,
+.btn-generate-prompt,
+.btn-generate-rag {
+  background-color: #f1f5f9;
+}
+
+/* Improve hover background feedback */
+.btn-copy:hover,
+.btn-reset:hover,
+.btn-generate-prompt:hover,
+.btn-generate-rag:hover {
+  background-color: #edf2f7;
+}
+
+/* Animate card entrance */
+.card {
+  animation: fadeIn 0.4s ease-in;
+}
+
+/* Optional Dark Mode */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --light-bg: #2d3748;
+    --dark-text: #f7fafc;
+    --light-text: #a0aec0;
+    --box-shadow: 0 4px 12px rgba(255, 255, 255, 0.05);
+  }
+
+  body {
+    background-color: var(--light-bg);
+    color: var(--dark-text);
+  }
+
+  .card,
+  .output-card {
+    background-color: #1a202c;
+    color: var(--dark-text);
+  }
+
+  .chip.selected {
+    background-color: var(--primary-color);
+    color: var(--light-text);
+  }
+}

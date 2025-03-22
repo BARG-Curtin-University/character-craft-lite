@@ -1,0 +1,28 @@
+{
+  "name": "personamate-lite",
+  "version": "1.0.0",
+  "description": "Generate structured chatbot personalities for educational, enterprise, and conversational agents",
+  "source": "src/index.html",
+  "scripts": {
+    "start": "parcel src/index.html --open",
+    "build": "parcel build src/index.html --public-url ./",
+    "build:pwa": "parcel build src/index.html --public-url ./ && workbox generateSW",
+    "build:single": "parcel build src/index.html --public-url ./ --no-source-maps",
+    "bundle": "parcel build src/index.html --no-source-maps && node scripts/create-standalone.js"
+  },
+  "keywords": [
+    "chatbot",
+    "personality",
+    "generator",
+    "pwa"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@parcel/packager-raw-url": "^2.14.1",
+    "@parcel/transformer-webmanifest": "^2.14.1",
+    "cheerio": "^1.0.0",
+    "parcel": "^2.10.3",
+    "workbox-cli": "^7.0.0"
+  }
+}
