@@ -260,17 +260,31 @@ function initializeEventListeners() {
   }
 }
 
+// Flag to track if initialization has already happened
+window.isPersonaMateInitialized = false;
+
+// Wrapper function to prevent multiple initializations
+function safeInitialize() {
+  if (window.isPersonaMateInitialized) {
+    console.log("PersonaMate already initialized, skipping");
+    return;
+  }
+  
+  window.isPersonaMateInitialized = true;
+  initializeEventListeners();
+}
+
 // Run on DOMContentLoaded
-document.addEventListener('DOMContentLoaded', initializeEventListeners);
+document.addEventListener('DOMContentLoaded', safeInitialize);
 
 // Also provide a way to manually initialize in case the DOMContentLoaded event
 // has already fired by the time the script runs (which can happen in some bundling scenarios)
-window.initializePersonaMate = initializeEventListeners;
+window.initializePersonaMate = safeInitialize;
 
 // If the document is already loaded, run initialization immediately
 if (document.readyState === 'complete' || document.readyState === 'interactive') {
   console.log("Document already ready, initializing with delay");
-  setTimeout(initializeEventListeners, 500); // Small delay to ensure DOM is fully processed
+  setTimeout(safeInitialize, 500); // Small delay to ensure DOM is fully processed
 }
 
 // Add a global error handler to catch any JS errors
@@ -301,7 +315,18 @@ document.addEventListener('DOMContentLoaded', function() {
   debugButton.addEventListener('click', function() {
     console.clear();
     console.log("Manual re-initialization triggered");
-    initializeEventListeners();
+    
+    // Reset initialization flag to force re-initialization
+    window.isPersonaMateInitialized = false;
+    
+    // Remove all existing event listeners from critical elements
+    const buttons = document.querySelectorAll('button');
+    buttons.forEach(btn => {
+      const newBtn = btn.cloneNode(true);
+      btn.parentNode.replaceChild(newBtn, btn);
+    });
+    
+    safeInitialize();
   });
   
   document.body.appendChild(debugButton);

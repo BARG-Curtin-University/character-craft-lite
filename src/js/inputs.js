@@ -105,6 +105,29 @@ export function getRandomOptionExcluding(selectId, excludeValues) {
 
 
 /**
+ * Updates the UI to show selected chips
+ * @param {string} selectId - The ID of the chip container
+ * @param {string} selectedValues - Comma-separated string of selected values
+ */
+export function updateChipSelectionUI(selectId, selectedValues) {
+  const chipSelect = document.getElementById(selectId);
+  if (!chipSelect) return;
+
+  const values = selectedValues.split(',').map(v => v.trim());
+  const chips = chipSelect.querySelectorAll('.chip');
+  
+  // First, clear all selected chips
+  chips.forEach(chip => chip.classList.remove('selected'));
+  
+  // Then, select the chips that match the values
+  chips.forEach(chip => {
+    if (values.includes(chip.dataset.value)) {
+      chip.classList.add('selected');
+    }
+  });
+}
+
+/**
  * Generates random selection for a multi-select (chip) field
  * @param {string} selectId - The ID of the chip container
  * @param {string} hiddenInputId - The ID of the hidden input to update

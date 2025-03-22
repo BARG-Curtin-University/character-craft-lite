@@ -161,9 +161,11 @@ $('body').append(`
       
       // Make sure initialization happens even if module loading fails
       setTimeout(function() {
-        if (window.initializePersonaMate) {
+        if (window.initializePersonaMate && !window.isPersonaMateInitialized) {
           console.log("Running initialization from standalone script");
           window.initializePersonaMate();
+        } else if (window.isPersonaMateInitialized) {
+          console.log("Already initialized, skipping standalone initialization");
         } else {
           console.warn("Standalone fallback: creating basic button handlers");
           
