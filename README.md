@@ -1,5 +1,15 @@
 # PersonaMate - Lite
+
+[![Live Preview](https://img.shields.io/badge/Live%20Demo-Open%20Now-brightgreen?logo=githubpages)](https://barg-curtin-university.github.io/personamate-lite/)
+[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![PWA Ready](https://img.shields.io/badge/PWA-ready-blueviolet)](https://web.dev/progressive-web-apps/)
+[![GitHub Pages](https://img.shields.io/badge/hosted%20on-GitHub%20Pages-orange?logo=github)](https://pages.github.com/)
+[![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-Auto%20Deploy-blue?logo=githubactions)]
+
+
 **Design the soul behind the chatbot.**
+
+![PersonaMate - Lite](docs/personamate-lite.png)
 
 PersonaMate is a personality configuration tool for creating structured chatbot personas for use in RAG pipelines, zero-shot prompt templates, and educational or enterprise-grade conversational agents.
 
