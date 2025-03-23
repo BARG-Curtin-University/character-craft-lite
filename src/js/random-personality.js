@@ -123,7 +123,7 @@ function updateChipSelectionUI(selectId, selectedValues) {
 }
 
 // Import these as needed
-import { generateRandomOrgName } from './data/models.js';
+import { generateRandomOrgName } from './models.js';
 
 /**
  * Generates a random personality by populating the form with random values
