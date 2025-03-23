@@ -9,7 +9,7 @@
 
 **Design the soul behind the chatbot.**
 
-![CharacterCraft - Lite](docs/charactercraft-lite.png)
+![CharacterCraft - Lite](docs/images/charactercraft-lite.png)
 
 [View Developer Docs](./docs/jsdoc/index.html)
 
