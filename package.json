@@ -7,7 +7,7 @@
   "scripts": {
     "start": "parcel src/index.html --open",
     "build": "parcel build src/index.html --public-url ./",
-    "build:pwa": "parcel build src/index.html --public-url ./ && workbox generateSW --config workbox-config.cjs",
+    "build:pwa": "parcel build src/index.html --public-url ./ && npx workbox-cli generateSW workbox-config.cjs",
     "build:single": "parcel build src/index.html --public-url ./ --no-source-maps",
     "bundle": "node scripts/create-standalone.js",
     "adr:index": "node scripts/generate-adr-index.js",
