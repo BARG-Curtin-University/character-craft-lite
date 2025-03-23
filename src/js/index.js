@@ -2,7 +2,7 @@
 
 // 📦 Core logic (utility-first)
 import './utils.js';
-import './data/models.js';
+import './models.js';
 import { log, logError } from './utils.js';
 
 // 🖼️ DOM setup (must happen early if others rely on it)
@@ -15,8 +15,9 @@ import './modals.js';
 
 // 📤 Actions
 import './export.js';
-import './data/prompts.js';
-import './data/rag.js';
+import './prompts.js';
+import './rag-docs.js';
+import './rag-ui.js';
 import './generation.js';
 import './random-personality.js';
 import '../update-check.js';
@@ -25,8 +26,8 @@ import './register-sw.js';
 import { generatePersonality } from './generation.js';
 import { generateRandomPersonality } from './random-personality.js';
 import { copyToClipboard, downloadProfile, resetForm } from './export.js';
-import { generateLLMPrompt } from './data/prompts.js';
-import { generateRAGDocument } from './data/rag.js';
+import { generateLLMPrompt } from './prompts.js';
+import { generateRAGDocument } from './rag-docs.js';
 import { checkForUpdates } from '../update-check.js';
 import { setupChipSelectors } from './inputs.js';
 
@@ -44,9 +45,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 // Make sure the event listeners work regardless of how the app is loaded
-function initializeEventListeners() {
+function initialiseEventListeners() {
   try {
-    log("✅ CharacterCraft initialization starting");
+    log("✅ CharacterCraft initialisation starting");
     
     // Debug info
     log("Document readyState:", document.readyState);
@@ -276,16 +277,16 @@ function initializeEventListeners() {
 }
 
 // Flag to track if initialization has already happened
-window.isCharacterCraftInitialized = false;
+window.isCharacterCraftInitialised = false;
 
 // Wrapper function to prevent multiple initializations
-function safeInitialize() {
-  if (window.isCharacterCraftInitialized) {
-    log("CharacterCraft already initialized, skipping");
+function safeInitialise() {
+  if (window.isCharacterCraftInitialised) {
+    log("CharacterCraft already initialised, skipping");
     return;
   }
   
-  window.isCharacterCraftInitialized = true;
+  window.isCharacterCraftInitialised = true;
   initializeEventListeners();
 }
 
@@ -294,11 +295,11 @@ document.addEventListener('DOMContentLoaded', safeInitialize);
 
 // Also provide a way to manually initialize in case the DOMContentLoaded event
 // has already fired by the time the script runs (which can happen in some bundling scenarios)
-window.initializeCharacterCraft = safeInitialize;
+window.initialiseCharacterCraft = safeInitialize;
 
 // If the document is already loaded, run initialization immediately
 if (document.readyState === 'complete' || document.readyState === 'interactive') {
-  log("Document already ready, initializing with delay");
+  log("Document already ready, initialising with delay");
   setTimeout(safeInitialize, 500); // Small delay to ensure DOM is fully processed
 }
 
@@ -309,6 +310,6 @@ window.addEventListener('error', function(event) {
 });
 
 // Add manual initialization via console for debugging
-log("Debug tip: You can manually initialize by typing window.initializeCharacterCraft() in the console");
+log("Debug tip: You can manually initialise by typing window.initializeCharacterCraft() in the console");
 
 // Debug initialization is disabled in production

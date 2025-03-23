@@ -2,6 +2,7 @@
 
 /**
  * Global DOM element references used throughout the application
+ * @type {Object}
  */
 export const elements = {
   // Form navigation elements
@@ -21,21 +22,26 @@ export const elements = {
   }
 };
 
-// Track form section state
+/**
+ * Track form section state
+ * @type {number}
+ */
 export let currentSection = 1;
 
 /**
  * Sets up the DOM elements and initial state when the page loads
+ * @returns {void}
  */
-export function initializeDom() {
-  console.log('DOM initialized');
+export function initialiseDom() {
+  console.log('DOM initialised');
 }
 
 /**
- * Initializes all event listeners for the application
+ * Initialises all event listeners for the application
+ * @returns {void}
  */
-export function initializeEventListeners() {
-  console.log('Event listeners initialized');
+export function initialiseEventListeners() {
+  console.log('Event listeners initialised');
 
   // Interactive chip selection
   document.querySelectorAll('.chip').forEach(chip => {

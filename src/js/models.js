@@ -95,9 +95,9 @@ export function generateRandomPerson() {
 }
 
 /**
- * Generates a random organization name based on org type
+ * Generates a random organisation name based on org type
  * @param {string} orgType - The type of organization
- * @returns {string} A random organization name
+ * @returns {string} A random organisation name
  */
 export function generateRandomOrgName(orgType) {
   const prefixes = ['Global', 'Next', 'Future', 'Alpha', 'Omega', 'Nova', 'Quantum', 'Apex', 'Pioneer', 'Elite', 'Prime', 'Vision', 'Horizon', 'Zenith', 'Vertex'];

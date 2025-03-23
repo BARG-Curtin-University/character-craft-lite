@@ -1,10 +1,11 @@
 // export.js - ES6+ module version for exporting personality profiles
 
 import { elements } from './dom.js';
-import { goToSection } from './navigation.js'; // assuming this exists or needs creating
+import { goToSection } from './navigation.js';
 
 /**
  * Copies the generated personality profile to clipboard
+ * @returns {void}
  */
 export function copyToClipboard() {
   const content = getProfileContent();
@@ -18,6 +19,7 @@ export function copyToClipboard() {
 
 /**
  * Downloads the generated personality profile as a text file
+ * @returns {void}
  */
 export function downloadProfile() {
   const content = getProfileContent();
@@ -28,6 +30,7 @@ export function downloadProfile() {
 
 /**
  * Gets the complete profile content as text
+ * @returns {string} The formatted personality profile text
  */
 export function getProfileContent() {
   const summary = document.getElementById('personalitySummary')?.innerText || '';
@@ -37,6 +40,9 @@ export function getProfileContent() {
 
 /**
  * Downloads a text file with the given content and filename
+ * @param {string} content - The text content to be downloaded
+ * @param {string} fileName - The name of the file to be created
+ * @returns {void}
  */
 export function downloadTextFile(content, fileName) {
   const blob = new Blob([content], { type: 'text/plain' });
@@ -50,6 +56,8 @@ export function downloadTextFile(content, fileName) {
 
 /**
  * Resets the form to its initial state
+ * @param {boolean} updateUI - Whether to update the UI after resetting the form
+ * @returns {void}
  */
 export function resetForm(updateUI = true) {
   document.getElementById('personalityForm')?.reset();

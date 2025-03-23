@@ -4,8 +4,10 @@
 export const DEBUG = false;
 
 /**
- * Logger utility that only outputs when DEBUG is true
- * Use this instead of console.log throughout the application
+ * Logger utility that only outputs when DEBUG is true.
+ * Use this instead of console.log throughout the application.
+ * 
+ * @param {...*} args - The arguments to log to the console
  */
 export function log(...args) {
   if (DEBUG) {
@@ -14,14 +16,20 @@ export function log(...args) {
 }
 
 /**
- * Error logger - always log errors regardless of DEBUG setting
+ * Error logger - always log errors regardless of DEBUG setting.
+ * 
+ * @param {...*} args - The error arguments to log to the console
  */
 export function logError(...args) {
   console.error(...args);
 }
 
 /**
- * Creates a summary item HTML for display
+ * Creates a summary item HTML for display.
+ * 
+ * @param {string} label - The label for the summary item
+ * @param {string} value - The value to display
+ * @returns {string} HTML string for the summary item
  */
 export function createSummaryItem(label, value) {
   return `
@@ -33,14 +41,21 @@ export function createSummaryItem(label, value) {
 }
 
 /**
- * Gets a random item from an array
+ * Gets a random item from an array.
+ * 
+ * @param {Array<*>} array - The array to select from
+ * @returns {*} A randomly selected item from the array
  */
 export function getRandomItem(array) {
   return array[Math.floor(Math.random() * array.length)];
 }
 
 /**
- * Safely gets an element by ID and handles the case where it might not exist
+ * Safely gets an element by ID and handles the case where it might not exist.
+ * 
+ * @param {string} id - The ID of the element to find
+ * @param {string} defaultValue - The default value to return if element not found
+ * @returns {string} The value of the element or the default value
  */
 export function getElementValueById(id, defaultValue = '') {
   const element = document.getElementById(id);
@@ -48,14 +63,20 @@ export function getElementValueById(id, defaultValue = '') {
 }
 
 /**
- * Check if a string is empty or only contains whitespace
+ * Check if a string is empty or only contains whitespace.
+ * 
+ * @param {string} str - The string to check
+ * @returns {boolean} True if the string is empty or contains only whitespace
  */
 export function isEmptyString(str) {
   return !str || str.trim() === '';
 }
 
 /**
- * Sanitizes a string for use in HTML
+ * Sanitizes a string for use in HTML.
+ * 
+ * @param {string} str - The string to sanitize
+ * @returns {string} The sanitized HTML string
  */
 export function sanitizeHTML(str) {
   const element = document.createElement('div');
@@ -64,7 +85,11 @@ export function sanitizeHTML(str) {
 }
 
 /**
- * Debounces a function to limit how often it can run
+ * Debounces a function to limit how often it can run.
+ * 
+ * @param {Function} func - The function to debounce
+ * @param {number} wait - The time in milliseconds to wait between executions
+ * @returns {Function} The debounced function
  */
 export function debounce(func, wait) {
   let timeout;
@@ -77,4 +102,3 @@ export function debounce(func, wait) {
     timeout = setTimeout(later, wait);
   };
 }
-

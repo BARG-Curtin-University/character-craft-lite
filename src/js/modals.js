@@ -12,9 +12,10 @@
  * @param {Object} config - Modal configuration object
  * @param {string} config.title - Modal title
  * @param {string} config.content - Main content text
- * @param {string} config.instructions - HTML instructions to display above content
- * @param {string} config.copyButtonText - Text for the copy button
- * @param {string} config.contentClass - CSS class for the content container
+ * @param {string} [config.instructions] - HTML instructions to display above content
+ * @param {string} [config.copyButtonText] - Text for the copy button
+ * @param {string} [config.contentClass] - CSS class for the content container
+ * @returns {void}
  */
 export function showModal(config) {
   // Create modal overlay
@@ -30,7 +31,7 @@ export function showModal(config) {
   // Add header
   const modalHeader = document.createElement('h2');
   modalHeader.textContent = config.title;
-  modalHeader.style.color = 'var(--primary-color)';
+  modalHeader.style.colour = 'var(--primary-colour)';
   modalHeader.style.marginBottom = '1rem';
   modalContent.appendChild(modalHeader);
   
@@ -45,7 +46,7 @@ export function showModal(config) {
   // Add content
   const contentContainer = document.createElement('div');
   contentContainer.className = config.contentClass || 'modal-content-container';
-  contentContainer.style.backgroundColor = 'var(--light-bg)';
+  contentContainer.style.backgroundColour = 'var(--light-bg)';
   contentContainer.style.padding = '1.5rem';
   contentContainer.style.borderRadius = 'var(--border-radius)';
   contentContainer.style.marginBottom = '1.5rem';
@@ -76,7 +77,7 @@ export function createModalOverlay() {
   overlay.style.left = '0';
   overlay.style.width = '100%';
   overlay.style.height = '100%';
-  overlay.style.backgroundColor = 'rgba(0,0,0,0.7)';
+  overlay.style.backgroundColour = 'rgba(0,0,0,0.7)';
   overlay.style.display = 'flex';
   overlay.style.justifyContent = 'center';
   overlay.style.alignItems = 'center';
@@ -91,7 +92,7 @@ export function createModalOverlay() {
 export function createModalContent() {
   const content = document.createElement('div');
   content.className = 'modal-content';
-  content.style.backgroundColor = 'white';
+  content.style.backgroundColour = 'white';
   content.style.padding = '2rem';
   content.style.borderRadius = 'var(--border-radius)';
   content.style.width = '80%';
@@ -132,8 +133,8 @@ export function createCopyButton(buttonText, textToCopy) {
   button.textContent = buttonText;
   button.className = 'btn-copy';
   button.style.padding = '0.75rem 1.5rem';
-  button.style.backgroundColor = 'var(--primary-color)';
-  button.style.color = 'white';
+  button.style.backgroundColour = 'var(--primary-color)';
+  button.style.colour = 'white';
   button.style.border = 'none';
   button.style.borderRadius = 'var(--border-radius)';
   button.style.cursor = 'pointer';

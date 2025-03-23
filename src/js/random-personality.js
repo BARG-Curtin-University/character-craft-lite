@@ -1,9 +1,15 @@
 // Import required functions
 import { generatePersonality } from './generation.js';
-import { collectFormData } from './data/rag.js';
+import { collectFormData } from './rag-ui.js';
 import { resetForm } from './export.js';
 
-// Define directly to avoid import issues in standalone version
+/**
+ * Generates a random option from a select element, excluding specified values.
+ * 
+ * @param {string} selectId - The ID of the select element.
+ * @param {string[]} excludeValues - Array of values to exclude from selection.
+ * @returns {string} The randomly selected option value.
+ */
 function generateRandomOptionExcluding(selectId, excludeValues) {
   console.log("Using inline generateRandomOptionExcluding function");
   const select = document.getElementById(selectId);
@@ -24,7 +30,14 @@ function generateRandomOptionExcluding(selectId, excludeValues) {
   return validOptions[randomIndex].value;
 }
 
-// Define helper for random multi-select
+/**
+ * Generates random selections for a multi-select chip element.
+ * 
+ * @param {string} selectId - The ID of the chip select element.
+ * @param {string} hiddenInputId - The ID of the hidden input to store selected values.
+ * @param {number} minItems - Minimum number of items to select.
+ * @param {number} maxItems - Maximum number of items to select.
+ */
 function generateRandomMultiSelect(selectId, hiddenInputId, minItems, maxItems) {
   console.log("Using inline generateRandomMultiSelect function");
   // Calculate random number of items to select
@@ -45,7 +58,13 @@ function generateRandomMultiSelect(selectId, hiddenInputId, minItems, maxItems) 
   updateChipSelectionUI(selectId, selectedItems);
 }
 
-// Helper function for getting random chips
+/**
+ * Gets a random selection of chips from a chip select element.
+ * 
+ * @param {string} chipSelectId - The ID of the chip select element.
+ * @param {number} count - Number of chips to select.
+ * @returns {string} Comma-separated string of selected chip values.
+ */
 function getRandomChips(chipSelectId, count) {
   console.log("Using inline getRandomChips function");
   const chipSelect = document.getElementById(chipSelectId);
@@ -70,7 +89,12 @@ function getRandomChips(chipSelectId, count) {
   return selectedChips.map(chip => chip.dataset.value).join(', ');
 }
 
-// Helper for updating UI
+/**
+ * Updates the UI to reflect selected chips.
+ * 
+ * @param {string} selectId - The ID of the chip select element.
+ * @param {string} selectedValues - Comma-separated string of selected values.
+ */
 function updateChipSelectionUI(selectId, selectedValues) {
   console.log("Using inline updateChipSelectionUI function");
   const chipSelect = document.getElementById(selectId);
@@ -101,6 +125,13 @@ function updateChipSelectionUI(selectId, selectedValues) {
 // Import these as needed
 import { generateRandomOrgName } from './data/models.js';
 
+/**
+ * Generates a random personality by populating the form with random values
+ * and triggering the personality generation process.
+ * 
+ * @export
+ * @returns {void}
+ */
 export function generateRandomPersonality() {
   console.log("✅ generateRandomPersonality called");
 
@@ -129,7 +160,7 @@ export function generateRandomPersonality() {
     document.getElementById('characterAge').value = person.ageRange;
     document.getElementById('characterRole').value = person.role;
 
-    // Organization fields
+    // Organisation fields
     const orgType = generateRandomOptionExcluding('orgType', ['', 'custom']);
     const orgName = generateRandomOrgName(orgType);
     const audience = generateRandomOptionExcluding('primaryAudience', ['', 'custom']);

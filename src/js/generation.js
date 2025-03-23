@@ -1,11 +1,14 @@
 // generation.js - ES6+ version
 import { log, logError } from './utils.js';
-import { collectFormData } from './data/rag.js';
+import { collectFormData } from './rag-ui.js';
 
 log("✅ generatePersonality loaded");
 
 /**
  * Creates a single summary item for the personality profile
+ * @param {string} label - The label for the summary item
+ * @param {string} value - The value to display for the summary item
+ * @returns {string} HTML string representing a summary item
  */
 function createSummaryItem(label, value) {
   return `<div class="summary-item"><span class="label">${label}:</span> <span class="value">${value}</span></div>`;
@@ -18,6 +21,8 @@ if (typeof window !== 'undefined') {
 
 /**
  * Generates a personality profile based on form inputs or random values
+ * Collects form data, generates summary and description, and updates the UI
+ * @returns {void}
  */
 export function generatePersonality() {
   try {
@@ -47,6 +52,23 @@ if (typeof window !== 'undefined') {
 
 /**
  * Generates the summary HTML and updates the DOM
+ * @param {Object} data - The personality profile data
+ * @param {string} [data.characterName] - Character name
+ * @param {string} [data.characterGender] - Character gender
+ * @param {string} [data.characterAge] - Character age range
+ * @param {string} [data.characterRole] - Character's organisational role
+ * @param {string} [data.orgType] - Type of organisation
+ * @param {string} [data.orgName] - Name of organisation
+ * @param {string} [data.audience] - Primary audience
+ * @param {string} [data.obTheories] - Organisational behaviour theories
+ * @param {string} [data.communicationStyle] - Communication style
+ * @param {string} [data.conflictResolution] - Conflict resolution approach
+ * @param {string} [data.negotiationMethod] - Negotiation method
+ * @param {string} [data.decisionMaking] - Decision-making approach
+ * @param {string} [data.emotionalIntelligence] - Emotional intelligence level
+ * @param {string} [data.feedbackMechanism] - Feedback mechanism
+ * @param {string} [data.coreValues] - Core values
+ * @returns {void}
  */
 export function generateSummary(data) {
   const items = [
@@ -76,7 +98,24 @@ export function generateSummary(data) {
 }
 
 /**
- * Generates a detailed personality description
+ * Generates a detailed personality description and updates the DOM
+ * @param {Object} data - The personality profile data
+ * @param {string} [data.characterName] - Character name
+ * @param {string} [data.characterGender] - Character gender
+ * @param {string} [data.characterAge] - Character age range
+ * @param {string} [data.characterRole] - Character's organisational role
+ * @param {string} [data.orgType] - Type of organisation
+ * @param {string} [data.orgName] - Name of organisation
+ * @param {string} [data.audience] - Primary audience
+ * @param {string} [data.obTheories] - Organisational behaviour theories
+ * @param {string} [data.communicationStyle] - Communication style
+ * @param {string} [data.conflictResolution] - Conflict resolution approach
+ * @param {string} [data.negotiationMethod] - Negotiation method
+ * @param {string} [data.decisionMaking] - Decision-making approach
+ * @param {string} [data.emotionalIntelligence] - Emotional intelligence level
+ * @param {string} [data.feedbackMechanism] - Feedback mechanism
+ * @param {string} [data.coreValues] - Core values
+ * @returns {void}
  */
 export function generateDescription(data) {
   let description = `<p><strong>${data.characterName || 'The chatbot character'}</strong> is a ${data.characterAge || 'mature'} ${data.characterGender || 'professional'} working as a ${data.characterRole || 'team member'} at <strong>${data.orgName || 'the organisation'}</strong>.`;

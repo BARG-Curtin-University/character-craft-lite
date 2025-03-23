@@ -5,6 +5,8 @@
 
 /**
  * Sets up chip selectors to behave like toggleable buttons
+ * Finds all chip-select containers and adds click event listeners to chips
+ * that toggle selection and update the associated hidden input value.
  */
 export function setupChipSelectors() {
   const chipContainers = document.querySelectorAll('.chip-select');
@@ -29,6 +31,8 @@ export function setupChipSelectors() {
 
 /**
  * Displays custom input fields based on "custom" selection in dropdowns
+ * Adds change event listeners to all select elements that show/hide
+ * custom input fields when "custom" is selected.
  */
 export function setupCustomInputToggles() {
   const selects = document.querySelectorAll('select');
