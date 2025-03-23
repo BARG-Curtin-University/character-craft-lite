@@ -460,3 +460,44 @@ button:focus {
     color: var(--light-text);
   }
 }
+
+/* 
+ * Footer Styles 
+ */
+ .site-footer {
+  text-align: center;
+  padding: 2rem 1rem;
+  font-size: 0.9rem;
+  color: var(--light-text);
+  background-color: transparent;
+  border-top: 1px solid #e2e8f0;
+  margin-top: 3rem;
+}
+
+.footer-content {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.footer-link {
+  color: var(--accent-color);
+  text-decoration: none;
+}
+
+.footer-link:hover {
+  text-decoration: underline;
+}
+
+.footer-meta {
+  font-size: 0.85rem;
+  color: var(--light-text);
+}
+
+.footer-privacy {
+  font-size: 0.85rem;
+  color: var(--light-text);
+}

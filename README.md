@@ -9,7 +9,9 @@
 
 **Design the soul behind the chatbot.**
 
-![PersonaMate - Lite](docs/personamate-lite.png)
+![CharacterCraft - Lite](docs/charactercraft-lite.png)
+
+[View Developer Docs](./docs/jsdoc/index.html)
 
 CharacterCraft is a personality configuration tool for creating structured chatbot personas for use in RAG pipelines, zero-shot prompt templates, and educational or enterprise-grade conversational agents.
 

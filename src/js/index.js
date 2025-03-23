@@ -30,6 +30,14 @@ import { generateRAGDocument } from './data/rag.js';
 import { checkForUpdates } from '../update-check.js';
 import { setupChipSelectors } from './inputs.js';
 
+// Somewhere in your update-check.js or index.js
+fetch('version.json')
+  .then(res => res.json())
+  .then(data => {
+    const versionEl = document.getElementById('appVersion');
+    if (versionEl) versionEl.textContent = data.version || 'N/A';
+  });
+
 document.addEventListener('DOMContentLoaded', () => {
   setupChipSelectors();
 });

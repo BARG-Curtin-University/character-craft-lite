@@ -3,12 +3,15 @@
   "version": "1.0.0",
   "description": "Generate structured chatbot personalities for educational, enterprise, and conversational agents",
   "source": "src/index.html",
+  "type": "module",
   "scripts": {
     "start": "parcel src/index.html --open",
     "build": "parcel build src/index.html --public-url ./",
     "build:pwa": "parcel build src/index.html --public-url ./ && workbox generateSW",
     "build:single": "parcel build src/index.html --public-url ./ --no-source-maps",
-    "bundle": "node scripts/create-standalone.js"
+    "bundle": "node scripts/create-standalone.js",
+    "adr:index": "node scripts/generate-adr-index.js",
+    "docs": "jsdoc -c jsdoc.json"
   },
   "keywords": [
     "chatbot",
@@ -22,6 +25,7 @@
     "@parcel/packager-raw-url": "^2.14.1",
     "@parcel/transformer-webmanifest": "^2.14.1",
     "cheerio": "^1.0.0",
+    "jsdoc": "^4.0.4",
     "parcel": "^2.10.3",
     "workbox-cli": "^7.0.0"
   }
