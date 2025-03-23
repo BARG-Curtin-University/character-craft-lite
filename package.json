@@ -9,7 +9,7 @@
     "build": "parcel build src/index.html --public-url ./",
     "build:pwa": "parcel build src/index.html --public-url ./ && npx workbox-cli generateSW workbox-config.cjs",
     "build:single": "parcel build src/index.html --public-url ./ --no-source-maps",
-    "bundle": "node scripts/create-standalone.js",
+    "bundle": "node scripts/create-standalone.cjs",
     "adr:index": "node scripts/generate-adr-index.js",
     "docs": "jsdoc -c jsdoc.json"
   },
