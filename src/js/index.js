@@ -27,7 +27,7 @@ import { generatePersonality } from './generation.js';
 import { generateRandomPersonality } from './random-personality.js';
 import { copyToClipboard, downloadProfile, resetForm } from './export.js';
 import { generateLLMPrompt } from './prompts.js';
-import { generateRAGDocument } from './rag-docs.js';
+import { generateRAGDocuments } from './rag-docs.js';
 import { checkForUpdates } from '../update-check.js';
 import { setupChipSelectors } from './inputs.js';
 
