@@ -37,10 +37,8 @@ jobs:
           echo "{ \"version\": \"${VERSION}\" }" > version.json
 
       - name: Build PWA Version
-        run: |
-          npm run build
-          npx workbox generateSW --config workbox-config.cjs
-
+        run: npm run build:pwa
+          
 
       - name: Create Standalone Version
         run: npm run bundle
