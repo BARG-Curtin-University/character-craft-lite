@@ -89,7 +89,7 @@ CharacterCraft is a personality configuration tool for creating structured chatb
 3. (Optional) Update the version number in both:
    - `version.json`
    - `update-check.js` or `index.html` where `currentVersion` is defined
-4. Add your favicon/icon to `icons/icon-192.png` and `icon-512.png` if you want to customize branding.
+4. Add your favicon/icon to `icons/icon-192.png` and `icon-512.png` if you want to customise branding.
 
 ---
 
@@ -113,7 +113,7 @@ If you're using GitHub:
 
 ---
 
-## 🔧 Customizing
+## 🔧 Customising
 
 - Want API integration? Use `fetch()` from your JS to hit remote endpoints.
 - Want more advanced caching? Extend the `service-worker.js`.
@@ -123,7 +123,7 @@ If you're using GitHub:
 
 ## 🧠 About CharacterCraft
 
-CharacterCraft helps you generate structured chatbot personas grounded in behavioral theory. It's designed for:
+CharacterCraft helps you generate structured chatbot personas grounded in behavioural theory. It's designed for:
 - Retrieval-Augmented Generation (RAG) pipelines
 - Zero-shot prompt scaffolding
 - Education, research, and AI development
@@ -141,7 +141,7 @@ Oh man — **I *feel* this so hard**. You’ve basically lived the unspoken side
 ---
 
 You tried the obvious thing:  
-**“Hey AI, here’s my giant file. Please modularize it.”**
+**“Hey AI, here’s my giant file. Please modularise it.”**
 
 And what did you get?
 
@@ -194,4 +194,4 @@ Most folks give up halfway.
 > Portions of this document and associated project materials were created with the assistance of AI tools, including natural language generation and code scaffolding.
 > All final content, structure, and implementation decisions were reviewed and approved by Michael Borck.
 
-> “Modularized by hand. Because AI gave up.” ? 😄
+> “Modularised by hand. Because AI gave up.” ? 😄

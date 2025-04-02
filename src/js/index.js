@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 // Make sure the event listeners work regardless of how the app is loaded
-function initialiseEventListeners() {
+function initializeEventListeners() {
   try {
     log("✅ CharacterCraft initialisation starting");
     
@@ -74,7 +74,7 @@ function initialiseEventListeners() {
       copyToClipboard: typeof copyToClipboard === 'function',
       downloadProfile: typeof downloadProfile === 'function',
       generateLLMPrompt: typeof generateLLMPrompt === 'function',
-      generateRAGDocument: typeof generateRAGDocument === 'function'
+      generateRAGDocuments: typeof generateRAGDocuments === 'function'
     });
 
     // Version check
@@ -136,9 +136,9 @@ function initialiseEventListeners() {
         ragBtn.addEventListener('click', function(e) {
           log("RAG button clicked");
           try {
-            generateRAGDocument();
+            generateRAGDocuments();
           } catch (err) {
-            logError("Error in generateRAGDocument:", err);
+            logError("Error in generateRAGDocuments:", err);
           }
         });
         log("RAG button listener added");
@@ -291,16 +291,16 @@ function safeInitialise() {
 }
 
 // Run on DOMContentLoaded
-document.addEventListener('DOMContentLoaded', safeInitialize);
+document.addEventListener('DOMContentLoaded', safeInitialise);
 
 // Also provide a way to manually initialize in case the DOMContentLoaded event
 // has already fired by the time the script runs (which can happen in some bundling scenarios)
-window.initialiseCharacterCraft = safeInitialize;
+window.initialiseCharacterCraft = safeInitialise;
 
 // If the document is already loaded, run initialization immediately
 if (document.readyState === 'complete' || document.readyState === 'interactive') {
   log("Document already ready, initialising with delay");
-  setTimeout(safeInitialize, 500); // Small delay to ensure DOM is fully processed
+  setTimeout(safeInitialise, 500); // Small delay to ensure DOM is fully processed
 }
 
 // Add a global error handler to catch any JS errors
@@ -310,6 +310,6 @@ window.addEventListener('error', function(event) {
 });
 
 // Add manual initialization via console for debugging
-log("Debug tip: You can manually initialise by typing window.initializeCharacterCraft() in the console");
+log("Debug tip: You can manually initialise by typing window.initialiseCharacterCraft() in the console");
 
 // Debug initialization is disabled in production
