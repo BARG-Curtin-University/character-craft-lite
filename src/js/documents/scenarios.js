@@ -131,14 +131,28 @@ Would you like more specific details about any particular option? Or could you s
 `;
 
   // Add communication style elements
-  communicationStyle.forEach(style => {
-    doc += commStyles[style] || commStyles.Balanced;
-  });
+  if (communicationStyle) {
+    // Handle both array and string formats
+    const commStyleArray = Array.isArray(communicationStyle) 
+      ? communicationStyle 
+      : communicationStyle.split(',').map(s => s.trim());
+    
+    commStyleArray.forEach(style => {
+      doc += commStyles[style] || commStyles.Balanced;
+    });
+  }
 
   // Add core values elements
-  coreValues.forEach(value => {
-    doc += getCoreValueContent(value);
-  });
+  if (coreValues) {
+    // Handle both array and string formats
+    const valuesArray = Array.isArray(coreValues)
+      ? coreValues
+      : coreValues.split(',').map(s => s.trim());
+    
+    valuesArray.forEach(value => {
+      doc += getCoreValueContent(value);
+    });
+  }
 
   doc += `
 ### Technical Information Request
@@ -156,18 +170,32 @@ This [aspect] is designed to [explain function/purpose]. Is there a specific cap
 `;
 
   // Add communication style elements for technical info
-  communicationStyle.forEach(style => {
-    if (style === "Technical" || style === "Educational") {
-      doc += commStyles[style];
-    }
-  });
+  if (communicationStyle) {
+    // Handle both array and string formats
+    const commStyleArray = Array.isArray(communicationStyle) 
+      ? communicationStyle 
+      : communicationStyle.split(',').map(s => s.trim());
+    
+    commStyleArray.forEach(style => {
+      if (style === "Technical" || style === "Educational") {
+        doc += commStyles[style];
+      }
+    });
+  }
 
   // Add core values for technical info
-  coreValues.forEach(value => {
-    if (value === "Excellence" || value === "Transparency") {
-      doc += getCoreValueContent(value);
-    }
-  });
+  if (coreValues) {
+    // Handle both array and string formats
+    const valuesArray = Array.isArray(coreValues)
+      ? coreValues
+      : coreValues.split(',').map(s => s.trim());
+    
+    valuesArray.forEach(value => {
+      if (value === "Excellence" || value === "Transparency") {
+        doc += getCoreValueContent(value);
+      }
+    });
+  }
 
   doc += `
 ### Comparative Information Request
@@ -185,16 +213,30 @@ Your specific priorities will determine which option best meets your needs. What
 `;
 
   // Add negotiation method elements
-  negotiationMethod.forEach(method => {
-    doc += getNegotiationContent(method);
-  });
+  if (negotiationMethod) {
+    // Handle both array and string formats
+    const negoArray = Array.isArray(negotiationMethod)
+      ? negotiationMethod
+      : negotiationMethod.split(',').map(s => s.trim());
+    
+    negoArray.forEach(method => {
+      doc += getNegotiationContent(method);
+    });
+  }
 
   // Add core values for comparison
-  coreValues.forEach(value => {
-    if (value === "Integrity" || value === "Transparency") {
-      doc += getCoreValueContent(value);
-    }
-  });
+  if (coreValues) {
+    // Handle both array and string formats
+    const valuesArray = Array.isArray(coreValues)
+      ? coreValues
+      : coreValues.split(',').map(s => s.trim());
+    
+    valuesArray.forEach(value => {
+      if (value === "Integrity" || value === "Transparency") {
+        doc += getCoreValueContent(value);
+      }
+    });
+  }
 
   doc += `
 ## Problem Resolution Scenarios
@@ -218,16 +260,30 @@ This information will help me provide the most effective assistance for your sit
 `;
 
   // Add emotional intelligence elements
-  emotionalIntelligence.forEach(trait => {
-    doc += getEmotionalContent(trait);
-  });
+  if (emotionalIntelligence) {
+    // Handle both array and string formats
+    const eiArray = Array.isArray(emotionalIntelligence)
+      ? emotionalIntelligence
+      : emotionalIntelligence.split(',').map(s => s.trim());
+    
+    eiArray.forEach(trait => {
+      doc += getEmotionalContent(trait);
+    });
+  }
 
   // Add conflict resolution elements
-  conflictResolution.forEach(approach => {
-    if (approach === "Active Listening" || approach === "Establish Ground Rules") {
-      doc += getConflictContent(approach);
-    }
-  });
+  if (conflictResolution) {
+    // Handle both array and string formats
+    const conflictArray = Array.isArray(conflictResolution)
+      ? conflictResolution
+      : conflictResolution.split(',').map(s => s.trim());
+    
+    conflictArray.forEach(approach => {
+      if (approach === "Active Listening" || approach === "Establish Ground Rules") {
+        doc += getConflictContent(approach);
+      }
+    });
+  }
 
   doc += `
 ### Service Complaint
@@ -247,18 +303,32 @@ Your satisfaction is important to us, and we appreciate the opportunity to make 
 `;
 
   // Add emotional intelligence for complaints
-  emotionalIntelligence.forEach(trait => {
-    if (trait === "Empathy" || trait === "Supportive") {
-      doc += getEmotionalContent(trait);
-    }
-  });
+  if (emotionalIntelligence) {
+    // Handle both array and string formats
+    const eiArray = Array.isArray(emotionalIntelligence)
+      ? emotionalIntelligence
+      : emotionalIntelligence.split(',').map(s => s.trim());
+    
+    eiArray.forEach(trait => {
+      if (trait === "Empathy" || trait === "Supportive") {
+        doc += getEmotionalContent(trait);
+      }
+    });
+  }
 
   // Add core values for complaints
-  coreValues.forEach(value => {
-    if (value === "Integrity" || value === "Excellence") {
-      doc += getCoreValueContent(value);
-    }
-  });
+  if (coreValues) {
+    // Handle both array and string formats
+    const valuesArray = Array.isArray(coreValues)
+      ? coreValues
+      : coreValues.split(',').map(s => s.trim());
+    
+    valuesArray.forEach(value => {
+      if (value === "Integrity" || value === "Excellence") {
+        doc += getCoreValueContent(value);
+      }
+    });
+  }
 
   doc += `
 ### Conflicting Expectations
@@ -280,21 +350,35 @@ What outcome would resolve this situation satisfactorily for you?"
 `;
 
   // Add conflict resolution for expectations
-  conflictResolution.forEach(approach => {
-    if (approach === "Focus on Interests" || approach === "Win-Win Solutions") {
-      doc += getConflictContent(approach);
-    }
-  });
+  if (conflictResolution) {
+    // Handle both array and string formats
+    const conflictArray = Array.isArray(conflictResolution)
+      ? conflictResolution
+      : conflictResolution.split(',').map(s => s.trim());
+    
+    conflictArray.forEach(approach => {
+      if (approach === "Focus on Interests" || approach === "Win-Win Solutions") {
+        doc += getConflictContent(approach);
+      }
+    });
+  }
 
   // Add negotiation method for expectations
-  negotiationMethod.forEach(method => {
-    if (method === "Collaborative" || method === "Accommodating") {
-      doc += getNegotiationContent(method);
-    }
-  });
+  if (negotiationMethod) {
+    // Handle both array and string formats
+    const negoArray = Array.isArray(negotiationMethod)
+      ? negotiationMethod
+      : negotiationMethod.split(',').map(s => s.trim());
+    
+    negoArray.forEach(method => {
+      if (method === "Collaborative" || method === "Accommodating") {
+        doc += getNegotiationContent(method);
+      }
+    });
+  }
 
   // Add conflict resolution guidelines if present
-  if (conflictResolution.length > 0) {
+  if (conflictResolution && (Array.isArray(conflictResolution) ? conflictResolution.length > 0 : conflictResolution.trim() !== '')) {
     doc += `
 #### Application Guidelines:
 - Assess both user needs and organisational constraints
