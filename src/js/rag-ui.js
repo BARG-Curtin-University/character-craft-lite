@@ -2,7 +2,8 @@
 // UI-only: responsible for modal construction, tab display, and interactions
 
 import { generateRAGDocuments } from './rag-docs.js';
-import { getRandomItem, generateRandomOrgName } from './models.js';
+import { getRandomItem, generateRandomOrgName, generateRandomPerson, genders, ageRanges, organisationalRoles } from './models.js';
+import { getRandomOption, getRandomChips } from './inputs.js';
   
 /**
  * Displays a modal dialog containing RAG (Retrieval-Augmented Generation) documents
