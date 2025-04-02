@@ -27,7 +27,7 @@ import { generatePersonality } from './generation.js';
 import { generateRandomPersonality } from './random-personality.js';
 import { copyToClipboard, downloadProfile, resetForm } from './export.js';
 import { generateLLMPrompt } from './prompts.js';
-import { generateRAGDocuments } from './rag-docs.js';
+import { generateRAGDocument } from './rag-docs.js';
 import { checkForUpdates } from '../update-check.js';
 import { setupChipSelectors } from './inputs.js';
 
@@ -74,7 +74,7 @@ function initializeEventListeners() {
       copyToClipboard: typeof copyToClipboard === 'function',
       downloadProfile: typeof downloadProfile === 'function',
       generateLLMPrompt: typeof generateLLMPrompt === 'function',
-      generateRAGDocuments: typeof generateRAGDocuments === 'function'
+      generateRAGDocument: typeof generateRAGDocument === 'function'
     });
 
     // Version check
@@ -136,9 +136,9 @@ function initializeEventListeners() {
         ragBtn.addEventListener('click', function(e) {
           log("RAG button clicked");
           try {
-            generateRAGDocuments();
+            generateRAGDocument();
           } catch (err) {
-            logError("Error in generateRAGDocuments:", err);
+            logError("Error in generateRAGDocument:", err);
           }
         });
         log("RAG button listener added");

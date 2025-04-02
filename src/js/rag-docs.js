@@ -8,6 +8,8 @@ import { generateDecisionMakingDoc } from './documents/decision.js';
 import { generateTheoreticalFoundationsDoc } from './documents/theory.js';
 import { generateScenariosDoc } from './documents/scenarios.js';
 import { generateAudienceInteractionsDoc } from './documents/audience.js';
+import { collectFormData } from './rag-ui.js';
+import { showRAGModal } from './rag-ui.js';
 
 /**
  * Generates a collection of RAG (Retrieval-Augmented Generation) documents based on personality data.
@@ -26,4 +28,33 @@ export function generateRAGDocuments(data) {
     { title: "Common Scenarios & Responses", content: generateScenariosDoc(data) },
     { title: "Audience-Specific Interactions", content: generateAudienceInteractionsDoc(data) }
   ];
+}
+
+/**
+ * Collects form data and generates RAG documents, then displays them in a modal
+ * This function is called directly from the button click handler
+ */
+export function generateRAGDocument() {
+  try {
+    console.log("🔍 Generating RAG documents");
+    const formData = collectFormData();
+    console.log("📝 Form data collected for RAG:", formData);
+    
+    if (!formData || !formData.orgName) {
+      console.warn("⚠️ Missing organization data for RAG generation");
+      // Add default org name if missing
+      formData.orgName = formData.orgName || "the organization";
+    }
+    
+    const documents = generateRAGDocuments(formData);
+    showRAGModal(formData);
+    console.log("✅ RAG documents generated successfully");
+  } catch (err) {
+    console.error("❌ Error generating RAG documents:", err);
+  }
+}
+
+// Make the function available globally for standalone version
+if (typeof window !== 'undefined') {
+  window.generateRAGDocument = generateRAGDocument;
 }
