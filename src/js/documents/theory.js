@@ -326,32 +326,52 @@ The ${orgName} chatbot consistently demonstrates:
   let traits = [];
 
   // Add traits from communication style
-  if (communicationStyle && communicationStyle.length > 0) {
-    communicationStyle.forEach(style => {
+  if (communicationStyle) {
+    // Handle both array and string formats
+    const commStyleArray = Array.isArray(communicationStyle) 
+      ? communicationStyle 
+      : communicationStyle.split(',').map(s => s.trim());
+    
+    commStyleArray.forEach(style => {
       const trait = commStyles[style] || commStyles.Balanced;
       if (!traits.includes(trait)) traits.push(trait);
     });
   }
 
   // Add traits from emotional intelligence
-  if (emotionalIntelligence && emotionalIntelligence.length > 0) {
-    emotionalIntelligence.forEach(ei => {
+  if (emotionalIntelligence) {
+    // Handle both array and string formats
+    const eiArray = Array.isArray(emotionalIntelligence)
+      ? emotionalIntelligence
+      : emotionalIntelligence.split(',').map(s => s.trim());
+    
+    eiArray.forEach(ei => {
       const trait = emoIntelligence[ei] || emoIntelligence.Standard;
       if (!traits.includes(trait)) traits.push(trait);
     });
   }
 
   // Add traits from negotiation method
-  if (negotiationMethod && negotiationMethod.length > 0) {
-    negotiationMethod.forEach(method => {
+  if (negotiationMethod) {
+    // Handle both array and string formats
+    const negoArray = Array.isArray(negotiationMethod)
+      ? negotiationMethod
+      : negotiationMethod.split(',').map(s => s.trim());
+    
+    negoArray.forEach(method => {
       const trait = negoMethods[method] || negoMethods.Standard;
       if (!traits.includes(trait)) traits.push(trait);
     });
   }
 
   // Add traits from core values
-  if (coreValues && coreValues.length > 0) {
-    coreValues.forEach(value => {
+  if (coreValues) {
+    // Handle both array and string formats
+    const valuesArray = Array.isArray(coreValues)
+      ? coreValues
+      : coreValues.split(',').map(s => s.trim());
+    
+    valuesArray.forEach(value => {
       const trait = coreVals[value] || coreVals.Standard;
       if (!traits.includes(trait)) traits.push(trait);
     });
