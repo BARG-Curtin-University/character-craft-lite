@@ -2,8 +2,26 @@
 // UI-only: responsible for modal construction, tab display, and interactions
 
 import { generateRAGDocuments } from './rag-docs.js';
-import { getRandomItem, generateRandomOrgName, generateRandomPerson, genders, ageRanges, organisationalRoles } from './models.js';
+import { getRandomItem, generateRandomOrgName, generateRandomPerson, genders, ageRanges, organisationalRoles, firstNames, lastNames } from './models.js';
 import { getRandomOption, getRandomChips } from './inputs.js';
+
+// Fallback implementation of generateRandomPerson in case the import fails
+function generateRandomPersonFallback() {
+  const gender = getRandomItem(genders);
+  const firstName = gender === 'neutral'
+    ? getRandomItem([...firstNames.masculine, ...firstNames.feminine])
+    : getRandomItem(firstNames[gender]);
+  const lastName = getRandomItem(lastNames);
+  const ageRange = getRandomItem(ageRanges);
+  const role = getRandomItem(organisationalRoles);
+
+  return {
+    name: `${firstName} ${lastName}`,
+    gender: gender,
+    ageRange: ageRange,
+    role: role
+  };
+}
   
 /**
  * Displays a modal dialog containing RAG (Retrieval-Augmented Generation) documents
@@ -172,7 +190,8 @@ export function showRAGModal(data) {
 export function collectFormData() {
   try {
     console.log("📋 Collecting form data");
-  const characterName = document.getElementById('characterName')?.value || generateRandomPerson().name;
+  const characterName = document.getElementById('characterName')?.value || 
+    (typeof generateRandomPerson === 'function' ? generateRandomPerson().name : generateRandomPersonFallback().name);
   const characterGender = document.getElementById('characterGender')?.value || getRandomItem(genders);
   const characterAge = document.getElementById('characterAge')?.value || getRandomItem(ageRanges);
   const characterRole = document.getElementById('characterRole')?.value || getRandomItem(organisationalRoles).title;
